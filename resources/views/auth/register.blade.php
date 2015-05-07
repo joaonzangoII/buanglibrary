@@ -46,10 +46,13 @@
               {!! Form::label('phone', 'Phonenumber:') !!}
               {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
             </div>
-             <div class="form-group">
-              {!! Form::label('password', 'Password:') !!}
-                
-              {!! Form::password('password', null, array('class'=> 'input-sm form-control')); !!}
+            {{--  <div class="form-group">
+              {!! Form::label('password', 'Password:') !!} 
+              {!! Form::password('password', Input::old('password'), array('class'=> 'form-control')); !!}
+            </div> --}}
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
             </div>
             <div class="row">
