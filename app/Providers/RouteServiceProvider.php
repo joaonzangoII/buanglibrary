@@ -36,6 +36,15 @@ class RouteServiceProvider extends ServiceProvider {
 			}
 		});
 
+		$router->bind("users",function($id){
+			try {
+				// dd($id);
+			  return \App\User::findOrfail($id);
+			} catch ( ModelNotFoundException $e ) {
+			  return abort("404");
+			}
+		});
+
 	}
 
 	/**

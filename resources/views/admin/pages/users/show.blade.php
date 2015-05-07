@@ -4,13 +4,18 @@
   <div class="container-fluid">
     <h1><b>User</b></h1>
     <div class="col-md-4">
-     <p><b>Titulo:</b> {{ $user->titulo }}</p>
-     <p><b>Cantor:</b> {{ $user->cantor }}</p>
-     <p><b>Publicado em:</b> {{ $user->published_at->format("Y-m-d") }}</p>
-     <p><b>Criada em:</b> {{ $user->created_at->format("Y-m-d") }}</p>
+     <p><b>Fullname:</b> {{ $user->fullname }}</p>
+     <p><b>Type:</b> {{ $user->user_type }}</p>
+     <p><b>Roles:</b></p>
+     <ul>
+       @foreach ($user->roles as $role)
+         <li>{{ $role->name }}</li>
+       @endforeach
+     </ul>
+     {{-- <p><b>Roles:</b> {{ $user->roles }}</p> --}}
    </div>
    <div class="col-md-8">
-    <img class="img-responsive img-thumbnail" src="/{{ $user->image->src }}" alt="{{ $user->alt }}">
+    {{-- <img class="img-responsive img-thumbnail" src="/{{ $user->image->src }}" alt="{{ $user->alt }}"> --}}
    </div>
   </div>
 @endsection

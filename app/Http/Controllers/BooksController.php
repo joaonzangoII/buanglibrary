@@ -18,6 +18,5 @@ class BooksController extends Controller {
      "auth" => \Auth::Check()
     ];
     return \Response::json($data);
-    // return view("site.pages.books.index",compact("book"));
   }
 }

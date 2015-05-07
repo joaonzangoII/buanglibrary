@@ -69,9 +69,9 @@ class AdminUsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(User $user)
 	{
-		//
+		return view ("admin.pages.users.show",compact("user"));
 	}
 
 	/**

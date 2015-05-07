@@ -12,18 +12,14 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-         {!! Form::open(array('method'=>"POST",'action' => 'AdminBooksController@store', 'class' => 'form', 'files'=>true)) !!}
+         {!! Form::open(array('method'=>"POST",'action' => 'AdminBooksController@store', 'class' => 'form')) !!}
           <div class="form-group">
-            {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => 'name')) !!}
+            {!! Form::label('book_id', 'Book') !!}
+            {!! Form::select('book_id', $book_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
           </div>
           <div class="form-group">
             {!! Form::label('num_booked', 'Number to Book') !!}
-            {!! Form::text('num_booked', Input::old('num_booked'), array('class' => 'form-control', 'placeholder' => 'name')) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => 'name')) !!}
+            {!! Form::text('num_booked', Input::old('num_booked'), array('class' => 'form-control', 'placeholder' => '# to book')) !!}
           </div>
 
           <div class="form-group">
@@ -36,25 +32,14 @@
               {!! Form::input('date','end_date', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'End date']) !!}
           </div>
 
-{{-- * id : int(10) unsigned
-* booker_id : int(11)
-* book_id : int(11)
-* num_booked : int(11)
-* amount : decimal(8,2)
-* start_date : timestamp
-* end_date : timestamp
-* created_at : timestamp
-* updated_at : timestamp --}}
-
 
           <div id="success"> </div>
-          {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          {!! Form::submit('Submit', array('class'=>'btn btn-promary')) !!}
+          {!! Form::button('Back', array('class'=>'btn btn-promary')) !!}
         {!! Form::close() !!}
         </div>
       </div>
   </div>
-  {{-- SELECT `id`, `titulo`, `link`, `cantor`, `foto`, `descricao`, `categoria_id`, `created_at`, `updated_at` FROM `musicas` WHERE 1 --}}
-  <!-- /#page-content-wrapper -->
   @endsection
   @section("scripts")
     @include("admin.partials._select2")

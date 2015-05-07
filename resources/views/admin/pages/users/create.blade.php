@@ -46,10 +46,6 @@
               {!! Form::label('phone', 'Phonenumber:') !!}
               {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
             </div>
-             {{--  <div class="form-group">
-               {!! Form::label('password', 'Password:') !!} 
-               {!! Form::password('password', Input::old('password'), array('class'=> 'form-control')); !!}
-             </div> --}}
              <div class="form-group">
                <label for="exampleInputPassword1">Password</label>
                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -63,8 +59,6 @@
         {!! Form::close() !!}
       </div>
   </div>
-  {{-- SELECT `id`, `titulo`, `link`, `cantor`, `foto`, `descricao`, `categoria_id`, `created_at`, `updated_at` FROM `musicas` WHERE 1 --}}
-  <!-- /#page-content-wrapper -->
   @endsection
   @section("scripts")
     @include("admin.partials._select2")

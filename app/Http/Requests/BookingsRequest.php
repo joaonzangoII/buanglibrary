@@ -22,7 +22,11 @@ class BookingsRequest extends Request {
 	public function rules()
 	{
 		return [
-			//
+			// "book_id" =>"required",
+			"num_booked" =>"required|numeric",
+			// "amount" =>"required|decimal",
+			"start_date" =>"required",
+			"end_date" =>"required",
 		];
 	}
 

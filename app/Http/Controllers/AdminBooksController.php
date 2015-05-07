@@ -11,6 +11,8 @@ use \Validator as Validator;
 use App\Book;
 use App\Cover;
 use App\Category;
+use App\Booking;
+use Carbon\Carbon;
 use App\Http\Requests\BooksRequest;
 use App\Http\Requests\BookingsRequest;
 class AdminBooksController extends Controller {
@@ -128,15 +130,30 @@ class AdminBooksController extends Controller {
 	}
 
 	public function getBooking(Book $book)
-	{   
-    return view('admin.pages.books.booking');
+	{  
+		$book_keys = Book::lists("name","id");
+    return view('admin.pages.books.booking',compact("book","book_keys"));
 	}
 
-	public function postBooking(BookingsRequest $request,Book $book)
+	public function postBooking(BookingsRequest $request)
 	{   
-		dd($book);
+	  $user = Auth::User();
+	  $data = $request->all();
+	  $book = Book::find($data["book_id"]);
+	  $data["booker_id"] = $user->id;
+	  $start_date = new Carbon($data["start_date"]);
+	  $end_date = new Carbon($data["end_date"]);
+	  $num_days = $start_date->diff($end_date)->days;
+	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
+	  // dd($book->price);
+	  $data["amount"] = $amount;
+
+	  // dd($data);
+		$booking = Booking::create($data);
+		$user->bookings()->attach(1);
+
 		Session::flash('flash_notice', 'Successfully booked this book!');
-    return redirect()->route("admin.getBooking");
+    return redirect()->route("admin.bookings.index");
 	}
 
 }

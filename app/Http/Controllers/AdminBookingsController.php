@@ -4,7 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use App\Book;
+use App\Booking;
 class AdminBookingsController extends Controller {
 
 	/**
@@ -16,13 +17,14 @@ class AdminBookingsController extends Controller {
 	{
 		if(\Auth::User()->isAdmin())
 		{
-			$type = "Admin";
+			$bookings = Booking::paginate(10);
 		}
 		else
-		{			
-			$type = \Auth::User()->user_type;
+		{	
+		  // $bookings = Booking::paginate(10);		
+			$bookings = \Auth::User()->bookings()->paginate(10);
 		}
-		return view ("admin.pages.bookings.index",compact('type'));
+		return view ("admin.pages.bookings.index",compact('bookings'));
 	}
 
 	public function booking(Book $book){
@@ -36,7 +38,8 @@ class AdminBookingsController extends Controller {
 	 */
 	public function create()
 	{
-		return view ("admin.pages.bookings.create");
+		$book_keys = Book::lists("name","id");
+		return view ("admin.pages.bookings.create",compact("book_keys"));
 	}
 
 	/**
