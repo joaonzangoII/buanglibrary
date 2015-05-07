@@ -12,7 +12,7 @@ class AdminUsersController extends Controller {
 	public function __construct()
   {
     \Debugbar::enable();
-  	$this->middleware('auth');
+  	$this->middleware('auth',['except' => 'store']);
 		$emp_keys = array();
 		// $emp_keys = Type::oldest("name")->lists("name","name");
 		// dd(\Auth::User());

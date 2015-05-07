@@ -11,7 +11,6 @@
        @endif
       </div>
         <div class="col-md-6 col-md-offset-2">
-          <div class="row">
           <!-- ''  =>"required",
           'lname'  =>"required",
           'address'  =>"required",
@@ -19,6 +18,7 @@
           'password'  =>"required",
           'phone'  =>"required", -->
            {!! Form::open(array('method'=>"POST",'action' => 'AdminUsersController@store', 'class' => 'form', 'files'=>true)) !!}
+          <div class="row">
             <div class="form-group">
               {!! Form::label('fname', 'Firstname:') !!}
               {!! Form::text('fname', Input::old('fname'), array('class' => 'form-control', 'placeholder' => 'firstname')) !!}
@@ -40,18 +40,23 @@
             </div>
             <div class="form-group">
               {!! Form::label('user_type', 'Type') !!}
-              {!! Form::select('user_type', ["lecturer","student"],null, array('class' => 'form-control', 'placeholder' => 'types')) !!}
+              {!! Form::select('user_type', ["lecturer" => "lecturer","student" => "student"],null, array('class' => 'form-control', 'placeholder' => 'types')) !!}
             </div>
             <div class="form-group">
               {!! Form::label('phone', 'Phonenumber:') !!}
               {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
+            </div>
+             <div class="form-group">
+              {!! Form::label('password', 'Password:') !!}
+                
+              {!! Form::password('password', null, array('class'=> 'input-sm form-control')); !!}
             </div>
             </div>
             <div class="row">
               <div id="success"> </div>
               {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
             </div>
-          </div>
+          {{-- </div> --}}
         {!! Form::close() !!}
       </div>
   </div>

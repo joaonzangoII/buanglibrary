@@ -11,7 +11,6 @@
        @endif
       </div>
         <div class="col-md-6 col-md-offset-2">
-          <div class="row">
           <!-- ''  =>"required",
           'lname'  =>"required",
           'address'  =>"required",
@@ -19,6 +18,7 @@
           'password'  =>"required",
           'phone'  =>"required", -->
            {!! Form::open(array('method'=>"POST",'action' => 'AdminUsersController@store', 'class' => 'form', 'files'=>true)) !!}
+          <div class="row">
             <div class="form-group">
               {!! Form::label('fname', 'Firstname:') !!}
               {!! Form::text('fname', Input::old('fname'), array('class' => 'form-control', 'placeholder' => 'firstname')) !!}
@@ -56,7 +56,7 @@
               <div id="success"> </div>
               {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
             </div>
-          </div>
+          {{-- </div> --}}
         {!! Form::close() !!}
       </div>
   </div>
