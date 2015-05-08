@@ -10,9 +10,9 @@
     <link href="{{ asset('/assets/admin/css/site.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href='/assets/admin/css/css?family=Roboto:400,300pis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href="/assets/admin/css/select2.min.css" rel="stylesheet" />
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link href="assets/admin/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

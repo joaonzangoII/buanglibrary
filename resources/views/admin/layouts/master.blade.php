@@ -82,10 +82,10 @@
 	@yield('content')
 
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="/assets/admin/js/jquery.min.js"></script>
+	<script src="/assets/admin/js/bootstrap.min.js"></script>
 	<script src="/assets/admin/js/select2.min.js"></script>
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+  <script src="/assets/admin/js/bootstrap-toggle.min.js"></script>
   @yield('scripts')
 </body>
 </html>

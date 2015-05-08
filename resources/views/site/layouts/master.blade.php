@@ -10,12 +10,12 @@
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/site.css">
     {{-- <link rel="stylesheet" href="/css/style.css"> --}}
     @yield("styles")
@@ -72,11 +72,11 @@
     @yield("content")
     @include("site.includes.footer")
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 {{--     <script src="/js/modernizr.js"></script>
     <script src="/js/main.js"></script> --}}
     @yield("scripts")
