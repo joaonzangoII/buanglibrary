@@ -2023,16 +2023,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.28",
+            "version": "v5.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "06a09429322cf53e5bd4587db1060f02a291562e"
+                "reference": "aa7046645e094b0134a4125cce6694f4b076ac62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/06a09429322cf53e5bd4587db1060f02a291562e",
-                "reference": "06a09429322cf53e5bd4587db1060f02a291562e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/aa7046645e094b0134a4125cce6694f4b076ac62",
+                "reference": "aa7046645e094b0134a4125cce6694f4b076ac62",
                 "shasum": ""
             },
             "require": {
@@ -2145,7 +2145,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-04-21 01:44:32"
+            "time": "2015-05-08 12:57:10"
         },
         {
             "name": "laravelcollective/html",
@@ -2955,16 +2955,16 @@
         },
         {
             "name": "stevebauman/location",
-            "version": "v1.1.6",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevebauman/location.git",
-                "reference": "4496b3bc17b84b224d42e05e22a90f5bd1289f4b"
+                "reference": "69bdd698812dbae1306fd3d53ed93be8f824d125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/location/zipball/4496b3bc17b84b224d42e05e22a90f5bd1289f4b",
-                "reference": "4496b3bc17b84b224d42e05e22a90f5bd1289f4b",
+                "url": "https://api.github.com/repos/stevebauman/location/zipball/69bdd698812dbae1306fd3d53ed93be8f824d125",
+                "reference": "69bdd698812dbae1306fd3d53ed93be8f824d125",
                 "shasum": ""
             },
             "require": {
@@ -3001,7 +3001,7 @@
                 "location",
                 "php"
             ],
-            "time": "2015-04-30 14:06:53"
+            "time": "2015-05-06 13:30:49"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3979,16 +3979,16 @@
         },
         {
             "name": "laracasts/generators",
-            "version": "1.1",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
-                "reference": "f1596fa3afc26221fc83549989769322f5cc162d"
+                "reference": "bf6d6ef779f397f6b1c0f133bbb8ebb6a55636e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/f1596fa3afc26221fc83549989769322f5cc162d",
-                "reference": "f1596fa3afc26221fc83549989769322f5cc162d",
+                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/bf6d6ef779f397f6b1c0f133bbb8ebb6a55636e0",
+                "reference": "bf6d6ef779f397f6b1c0f133bbb8ebb6a55636e0",
                 "shasum": ""
             },
             "require": {
@@ -4019,7 +4019,7 @@
                 "generators",
                 "laravel"
             ],
-            "time": "2015-03-02 19:20:34"
+            "time": "2015-05-07 15:53:57"
         },
         {
             "name": "laracasts/testdummy",

@@ -2,55 +2,55 @@
 @extends("admin.layouts.master")
 @section("content")
 <div class="container-fluid">
-    @include("errors.list")
+    <div class="col-md-12">
+     @if($errors->any())
+       <div class="alert alert-danger">
+         <a href="#" class="close" data-dismiss="alert">&times</a>
+         {!! implode('',$errors->all('<li class="error">:message</li>'))!!}
+       </div>
+     @endif
+    </div>
     <div class="row">
-      <div class="col-lg-6">
-       {!! Form::model($user, array('method'=>"PATCH", 'action' => ['AdminUsersController@update', $user->id], 'class' => 'form', 'files'=>true)) !!}
-        <div class="form-group">
-          {!! Form::label('titulo', 'Titulo') !!}
-          {!! Form::text('titulo', null, array('class' => 'form-control', 'placeholder' => 'Titulo')) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('cantor', 'Cantor') !!}
-          {!! Form::text('cantor', null, array('class' => 'form-control', 'placeholder' => 'Cantor')) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('link', 'Link') !!}
-          {!! Form::text('link', null, array('class' => 'form-control', 'placeholder' => 'Link')) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('descricao', 'Descrição') !!}
-          {!! Form::textarea('descricao', null, array('class' => 'form-control', 'placeholder' => 'Descrição')) !!}
-        </div>
-      {{--   <div class="form-group">
-          <label for="attrLinkDaImagem">Link da Imagem</label>
-          <input name ="linkdaimagem" type="text" class="form-control" id="attrLinkDaImagem" placeholder="Link da Imagem">
-        </div> --}}
-        <div class="form-group">
-          {!! Form::label('categoria_id', 'Categoria') !!}
-          {!! Form::select('categoria_id',$categorias, null, array('class' => 'form-control')) !!}
-        </div>
-         <div class="form-group">
-            {!! Form::label('published_at', 'Publicado em') !!}
-            {!! Form::input('date','published_at', $user->published_at,['class'=>'form-control', 'placeholder' => 'Image alt...']) !!}
-        </div>
-
-          {{-- <div class="control-group">
+      <div class="col-md-6 col-md-offset-3">
+       {!! Form::model($user, array('method'=>"PATCH", 'action' => ['AdminUsersController@update', $user->id], 'class' => 'form')) !!}
+          <div class="row">
+            <div class="form-group">
+              {!! Form::label('fname', 'Firstname:') !!}
+              {!! Form::text('fname', Input::old('fname'), array('class' => 'form-control', 'placeholder' => 'firstname')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('lname', 'Lastname:') !!}
+              {!! Form::text('lname', Input::old('lname'), array('class' => 'form-control', 'placeholder' => 'lastname')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::hidden('fullname', '') !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('address', 'Adress:') !!}
+              {!! Form::text('address', Input::old('address'), array('class' => 'form-control', 'placeholder' => 'address')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('email', 'Email:') !!}
+              {!! Form::text('email', Input::old('email'), array('class' => 'form-control', 'placeholder' => 'email')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('user_type', 'Type') !!}
+              {!! Form::select('user_type', $emp_keys,null, array('class' => 'form-control', 'placeholder' => 'types')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('phone', 'Phonenumber:') !!}
+              {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
+            </div>
              <div class="form-group">
-                {!! Form::label('alt', 'Image Alt') !!}
-                {!! Form::text('img_alt', null  ,array('class'=>'form-control', 'placeholder' => 'Image alt...')) !!}
+               <label for="exampleInputPassword1">Password</label>
+               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+             </div>
             </div>
-            <div class="controls">
-              {!! Form::file('image') !!}
-               <p class="help-block">Hey! Please don't upload over 15MB images!</p>
-            <p class="errors">{{$errors->first('image')}}</p>
-              @if(Session::has('error'))
-                <p class="errors">{{ Session::get('error') }}</p>
-              @endif
+            <div class="row">
+              <div id="success"> </div>
+              {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
             </div>
-          </div> --}}
-          <div id="success"> </div>
-          {!! Form::submit('Modificar', array('class'=>'btn btn-info')) !!}
+          {{-- </div> --}}
         {!! Form::close() !!}
       </div>
     </div>

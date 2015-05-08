@@ -18,6 +18,7 @@ class CreateCoversTable extends Migration {
 			$table->string('alt');
 			$table->string('image');
 			$table->integer('book_id');
+			// $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
 			$table->timestamp('published_at');
 			$table->timestamps();
 		});

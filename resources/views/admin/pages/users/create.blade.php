@@ -53,7 +53,7 @@
             </div>
             <div class="row">
               <div id="success"> </div>
-              {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+              {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
             </div>
           {{-- </div> --}}
         {!! Form::close() !!}

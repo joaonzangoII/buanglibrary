@@ -114,25 +114,33 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             case "super_admin":
               $assigned_permissions[] = $this->getIdInArray($permissions, 'create_admin');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'create_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_book');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_book');
+
               $assigned_permissions[] = $this->getIdInArray($permissions, 'create_user');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'view_user');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_user');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_user');
               break;
-            case 'student':
-              $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
-              break;
             case 'admin':
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'create_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_book');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_book');
+
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'create_user');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'view_user');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_user');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_user');
                 break;
+            case 'student':
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
+              break;
             case 'lecturer':
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'get_discount');
                 break;
             default:

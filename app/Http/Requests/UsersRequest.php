@@ -25,7 +25,7 @@ class UsersRequest extends Request {
 			'fname'  =>"required",
 			'lname'  =>"required",
 			'address'  =>"required",
-			'email'  =>"required|email|unique:users",
+			'email'  =>"required|email|unique:users,email",
 			'password'  =>"required|min:6",
 			'phone'  =>"required",
 		];

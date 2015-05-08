@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Type;
 use App\User;
+use \Auth as Auth;
+use \Session as Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 
@@ -80,9 +82,9 @@ class AdminUsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(User $user)
 	{
-		//
+		return view ("admin.pages.users.edit",compact("user"));
 	}
 
 	/**
@@ -91,7 +93,7 @@ class AdminUsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(UsersRequest $request)
 	{
 		//
 	}
@@ -102,9 +104,11 @@ class AdminUsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(User $user)
 	{
-		//
+		 $user->delete();
+		 Session::flash('flash_notice', 'Successfully deleted the user!');
+		 return redirect()->route("admin.users.index");
 	}
 
 }

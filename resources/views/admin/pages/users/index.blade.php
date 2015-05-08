@@ -14,18 +14,20 @@
             <th>email</th>
             <th>Permissions</th>
             <th>User Type</th>
+            <th>Actions</th>
           </tr>
-          @foreach($users as $key => $employee)
+          @foreach($users as $key => $value)
              <tr>
-               <td>{{$employee->fullname}}</td>
-               <td>{{$employee->email}}</td>
+               <td>{{$value->fullname}}</td>
+               <td>{{$value->email}}</td>
                <td>
-                 @foreach ($employee->permissions as $permission)
+                 @foreach ($value->permissions as $permission)
                   {{ $permission->name }}
                  @endforeach
                </td>
-               <td>{{$employee->user_type}}</td>
-               <!-- <td>{{$employee->title}}</td> -->
+               <td>{{$value->value_type}}</td>
+               <td>@include("admin.partials._actions_users")</td>
+               <!-- <td>{{$value->title}}</td> -->
                {{-- <td>
                <img width="50px" src="/{{ $image->image->src }}" alt="" />
              </td> --}}

@@ -28,7 +28,9 @@ class CreateBooksTable extends Migration {
 			$table->decimal("price");
 			$table->string("slug");
 			$table->string("cover_id");
+			// $table->foreign('cover_id')->references('id')->on('covers')->onDelete('cascade');
 			$table->integer("user_id");
+			// $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamp("published_at");
 			$table->timestamps();
 		});

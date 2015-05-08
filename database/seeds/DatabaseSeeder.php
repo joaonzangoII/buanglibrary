@@ -45,31 +45,49 @@ class UserTypeTableSeeder extends Seeder {
         ] );
     }
 }
-
 class UserPermissionTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
         \App\UserPermission::truncate();
     }
 }
+class BookingUserTableSeeder extends Seeder {
+   //bcrypt = Hash::Make
+    public function run() {
+        \App\BookingUser::truncate();
+    }
+}
 class PermissionTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
         \App\Permission::truncate();
-
+        \App\Permission::create( [
+            'name' => 'create_user' ,
+        ]);
+        \App\Permission::create( [
+            'name' => 'view_user' ,
+        ]);
          \App\Permission::create( [
-            'name' => 'edit_book' ,
-        ]);
-
-        \App\Permission::create( [
-            'name' => 'delete_book' ,
+            'name' => 'edit_user' ,
         ]);
         \App\Permission::create( [
-            'name' => 'create_book' ,
+            'name' => 'delete_user' ,
         ]);
         \App\Permission::create( [
           'name' => 'book_a_book' ,
         ]); 
+        \App\Permission::create( [
+            'name' => 'create_book' ,
+        ]);
+        \App\Permission::create( [
+            'name' => 'view_book' ,
+        ]);
+         \App\Permission::create( [
+            'name' => 'edit_book' ,
+        ]);
+        \App\Permission::create( [
+            'name' => 'delete_book' ,
+        ]);
         \App\Permission::create( [
           'name' => 'create_admin' ,
         ]);
