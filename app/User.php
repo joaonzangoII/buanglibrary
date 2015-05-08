@@ -141,24 +141,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             case 'lecturer':
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
-                $assigned_permissions[] = $this->getIdInArray($permissions, 'get_discount');
+                // $assigned_permissions[] = $this->getIdInArray($permissions, 'get_discount');
                 break;
             default:
                 // throw new \Exception("The employee status entered does not exist");
         }
-
+        // dd($assigned_permissions);
         $this->permissions()->attach($assigned_permissions);
     }
-		/**
-		* Add permissions to user to make them a concierge
-		*/
-		// public function setMakeEmployeeAttribute($title){
-		//
-		//
-		// }
-
-		// public function getpermissionsAttribute($value)
-    // {
-    //     return explode(', ', $value);
-    // }
 }

@@ -6,7 +6,7 @@
   <div class="wrapper">
      <!-- Page Content -->
     <div class="container">
-    BUANG LIBRARY
+   <h1 class="pull-center" style="color: #FFFFFF; font-size: 100px;"><b>Buang Library</b></h1>
   {{-- 
         @if(count($books)>0)
         <!-- Portfolio Item Heading -->

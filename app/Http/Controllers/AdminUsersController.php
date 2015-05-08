@@ -53,13 +53,6 @@ class AdminUsersController extends Controller {
 	 */
 	public function store(UsersRequest $request)
 	{
-		// \DB::insert('insert into users (fname,lname,address,email,phone) values (?,?,?,?,?)', array(
-		// 	          $request->input("fname"),
-		// 	          $request->input("lname"),
-		// 	          $request->input("address"),
-		// 	          $request->input("email"),
-		// 	          $request->input("phone")
-		// 					 ));
 		$user = User::create($request->all());
 		$user->makeEmployee($request->input("user_type"));
 		return redirect()->route('admin.users.index')->with('flash_notice', 'New category created');
@@ -93,11 +86,13 @@ class AdminUsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(UsersRequest $request)
+	public function update(UsersRequest $request,User $user)
 	{
-		//
-	}
-
+		// dd("here");
+		$data=$request->all();
+		$user->update($data);
+		return redirect()->route("admin.users.index")->with('flash_notice', 'A user has been updated');
+  }
 	/**
 	 * Remove the specified resource from storage.
 	 *
