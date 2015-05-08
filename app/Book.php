@@ -47,6 +47,11 @@ class Book extends Model implements SluggableInterface{
 		return $this->belongsTo("App\Category");
 	}
 
+   public function booking()
+   {
+      return $this->belongsToOne('App\Book',"bookings_books");
+   }
+
   public  function scopeLike($query, $field, $value){
     return $query->where($field, 'LIKE', "%$value%");
   }

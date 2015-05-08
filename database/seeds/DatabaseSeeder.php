@@ -115,6 +115,7 @@ class UserTableSeeder extends Seeder {
             'fullname' => '' ,
             'address' => 'address' ,
             'user_type' => 'admin' ,
+            'user_number' => 'ADM00001' ,
         ]);
 
 				$user->makeEmployee('admin');
@@ -128,6 +129,7 @@ class UserTableSeeder extends Seeder {
             'fullname' => '' ,
             'address' => 'address' ,
             'user_type' => 'super_admin' ,
+            'user_number' => 'SPR00001' ,
         ]);
 
         $user->makeEmployee('super_admin');
@@ -140,8 +142,21 @@ class UserTableSeeder extends Seeder {
             'fullname' => '' ,
             'address' => 'address' ,
             'user_type' => 'student' ,
+            'user_number' => 'ST00001' ,
         ]);
 
-        $user->makeEmployee('student');
+        $user = \App\User::create( [
+            'email' => 'joaonzango@gmail.comm' ,
+            'password' => "dbs" ,
+            'fname' => 'Julio' ,
+            'lname' => 'Nzango' ,
+            'fullname' => '' ,
+            'address' => 'address' ,
+            'user_type' => 'lecturer' ,
+            'user_number' => 'LEC00001' ,
+        ]);
+
+
+        $user->makeEmployee('lecturer');
     }
 }

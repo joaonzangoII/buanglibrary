@@ -15,14 +15,16 @@
             <th>Amount</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Booker</th>
           </tr>
           @foreach($bookings as $key => $booking)
              <tr>
-               <td>{{$booking->book}}</td>
+               <td>{{$booking->book[0]->fulltitle}}</td>
                <td>{{$booking->num_booked}}</td>
                <td>{{$booking->amount}}</td>
                <td>{{$booking->start_date}}</td>
                <td>{{$booking->end_date}}</td>
+               <td>{{$booking->user[0]->fullname}}</td>
               </tr>
             @endforeach
         </table>

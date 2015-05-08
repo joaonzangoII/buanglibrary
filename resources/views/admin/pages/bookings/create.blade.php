@@ -12,7 +12,11 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-         {!! Form::open(array('method'=>"POST",'action' => 'AdminBooksController@store', 'class' => 'form')) !!}
+         {!! Form::open(array('method'=>"POST",'action' => 'AdminBookingsController@store', 'class' => 'form')) !!}
+          <div class="form-group">
+            {!! Form::label('booker_id', 'User') !!}
+            {!! Form::select('booker_id', $user_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
+          </div>
           <div class="form-group">
             {!! Form::label('book_id', 'Book') !!}
             {!! Form::select('book_id', $book_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}

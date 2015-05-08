@@ -144,14 +144,24 @@ class AdminBooksController extends Controller {
 	  $start_date = new Carbon($data["start_date"]);
 	  $end_date = new Carbon($data["end_date"]);
 	  $num_days = $start_date->diff($end_date)->days;
+	   if($end_date < $start_date){
+	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
+	  }
+
+	  $num_days = $start_date->diff($end_date)->days;
+	  // dd($num_days);
+		if($num_days <=  0)
+		{
+			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
+		}
 	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
-	  // dd($book->price);
 	  $data["amount"] = $amount;
 
-	  // dd($data);
 		$booking = Booking::create($data);
-		$user->bookings()->attach(1);
-
+    $user->bookings()->attach($booking);
+		$booking->book()->attach($book);
+    $book->decrement("avail_books",$data["num_booked"]);
+    $book->save();
 		Session::flash('flash_notice', 'Successfully booked this book!');
     return redirect()->route("admin.bookings.index");
 	}
