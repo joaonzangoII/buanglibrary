@@ -117,12 +117,13 @@ class AdminBooksController extends Controller {
 	 */
 	public function destroy(Book $book)
 	{   
-    // dd(public_path(). "/images/uploads/". $book->cover->image)/0;
-    if (!\File::delete(public_path(). "/images/uploads/". $book->cover->image))
-		{
-			Session::flash('flash_notice', 'ERROR deleteing the File!');
-			return redirect()->route("admin.books.index");
-		}
+    if($book->cover!=null){
+	    if (!\File::delete(public_path(). "/images/uploads/". $book->cover->image))
+			{
+				Session::flash('flash_notice', 'ERROR deleteing the File!');
+				return redirect()->route("admin.books.index");
+			}
+	  }
     // dd($book->cover->image);
 		$book->delete();
 		Session::flash('flash_notice', 'Successfully deleted the book!');
@@ -154,6 +155,11 @@ class AdminBooksController extends Controller {
 		{
 			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
 		}
+
+		if(!$book->avail_books >= $data["num_booked"]){
+	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
+	  }
+
 	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
 	  $data["amount"] = $amount;
 

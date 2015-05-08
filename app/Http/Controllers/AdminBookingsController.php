@@ -65,12 +65,20 @@ class AdminBookingsController extends Controller {
 	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
 	  }
 
+
+
 	  $num_days = $start_date->diff($end_date)->days;
 	  // dd($num_days);
 		if($num_days <=  0)
 		{
 			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
 		}
+
+		if($data["num_booked"] > $book->avail_books ){
+	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
+	  }
+
+
 	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
 	  $data["amount"] = $amount;
 	  // dd($data);

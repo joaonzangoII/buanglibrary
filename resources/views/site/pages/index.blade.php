@@ -6,6 +6,8 @@
   <div class="wrapper">
      <!-- Page Content -->
     <div class="container">
+    BUANG LIBRARY
+  {{-- 
         @if(count($books)>0)
         <!-- Portfolio Item Heading -->
         <div class="row">
@@ -28,14 +30,12 @@
                 <h3>Book Description</h3>
                 <p>{{ $books[0]->description}}</p>
                 <h3>Book Details</h3>
-                {{-- <ul> --}}
                     <p>Name:  {{ $books[0]->name }}</p>
                     <p>title: {{ $books[0]->title }}</p>
                     <p>ISBN:  {{ $books[0]->isbn }}</p>
                     <p>Year:  {{ $books[0]->year }}</p>
                     <p> {!!\DNS2D::getBarcodeHTML($books[0]->isbn, "QRCODE")!!}</p>
                     <p><a class="btn btn-primary btn-large" href="/book/{{ $books[0]->slug }}">View</a></p>
-                {{-- </ul> --}}
             </div>
 
         </div>
@@ -58,7 +58,7 @@
 
         </div>
         <!-- /.row -->
-        <hr>
+        <hr>--}}
     </div>
     <!-- /.container -->
   </div>

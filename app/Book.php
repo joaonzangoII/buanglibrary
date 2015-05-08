@@ -38,7 +38,7 @@ class Book extends Model implements SluggableInterface{
   public function cover(){
     return $this->hasOne("App\Cover");
   }
-
+  
   // public function getCoverAttribute($cover){
   //   return "hello/" . $cover;
   // }
@@ -49,7 +49,7 @@ class Book extends Model implements SluggableInterface{
 
    public function booking()
    {
-      return $this->belongsToOne('App\Book',"bookings_books");
+      return $this->belongsToMany('App\Book',"bookings_books");
    }
 
   public  function scopeLike($query, $field, $value){
