@@ -6,8 +6,8 @@
 
     <link rel="stylesheet" href="/assets/admin/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/admin/css/jquery-ui.css">
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/site.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/admin/css/site.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>

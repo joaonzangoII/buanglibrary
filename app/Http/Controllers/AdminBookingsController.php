@@ -55,17 +55,19 @@ class AdminBookingsController extends Controller {
 	public function store(BookingsRequest $request)
 	{
 	  $data = $request->all();
+	  // dd($data);
+	  if(!array_key_exists("booker_id" ,$data)){
+	  	return redirect()->back()->withInput()->withErrors('cannot book now');
+	  }
 		$user = User::find($data["booker_id"]);
 	  $book = Book::find($data["book_id"]);
 	  $data["booker_id"] = $user->id;
 	  $start_date = new Carbon($data["start_date"]);
 	  $end_date = new Carbon($data["end_date"]);
-
+	  // dd($data);
 	  if($end_date < $start_date){
 	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
 	  }
-
-
 
 	  $num_days = $start_date->diff($end_date)->days;
 	  // dd($num_days);

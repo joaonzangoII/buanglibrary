@@ -11,11 +11,11 @@ class SearchController extends Controller {
     $query =$request->input('query');
     // dd($query);
     $search_values = array();
-    $search_values= Book::with('category')->like('title',$query)
+    $search_values= Book::with('book_category')->like('title',$query)
                                              ->latest()->paginate(10);                                
     $total=$search_values->toArray()["total"];
 
-    return view("site.search",compact("query","total","search_values"));
+    return view("site.pages.search",compact("query","total","search_values"));
 
   }
 

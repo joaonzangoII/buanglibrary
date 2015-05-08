@@ -37,16 +37,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 	/**
-     * Get the roles a user has
+     * Get the permissions a user has
      */
   public function type()
   {
-      return $this->belongsTo('App\Type');
+      return $this->belongsTo('App\UserType');
   }
 
-  public function roles()
+  public function permissions()
   {
-      return $this->belongsToMany('App\Role', 'users_roles');
+      return $this->belongsToMany('App\Permission', 'users_permissions');
   }
 
 	public function books(){
@@ -57,14 +57,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     return $this->belongsToMany('App\Booking', 'bookings_users');
   }
   /**
-     * Find out if User is an employee, based on if has any roles
+     * Find out if User is an employee, based on if has any permissions
      *
      * @return boolean
      */
     public function isEmployee()
     {
-        $roles = $this->roles->toArray();
-        return !empty($roles);
+        $permissions = $this->permissions->toArray();
+        return !empty($permissions);
     }
 
     public function setPasswordAttribute($pass){
@@ -76,9 +76,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * $return boolean
      */
-    public function hasRole($check)
+    public function hasPermission($check)
     {
-        return in_array($check, array_fetch($this->roles->toArray(), 'name'));
+        return in_array($check, array_fetch($this->permissions->toArray(), 'name'));
     }
 
     public function isAdmin()
@@ -104,52 +104,52 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Add roles to user to make them a concierge
+     * Add permissions to user to make them a concierge
      */
     public function makeEmployee($title)
     {
-        $assigned_roles = array();
-        $roles = array_fetch(\App\Role::all()->toArray(), 'name');
+        $assigned_permissions = array();
+        $permissions = array_fetch(\App\Permission::all()->toArray(), 'name');
         switch ($title) {
             case "super_admin":
-              $assigned_roles[] = $this->getIdInArray($roles, 'create_admin');
-              $assigned_roles[] = $this->getIdInArray($roles, 'create_book');
-              $assigned_roles[] = $this->getIdInArray($roles, 'edit_book');
-              $assigned_roles[] = $this->getIdInArray($roles, 'delete_book');
-              $assigned_roles[] = $this->getIdInArray($roles, 'create_user');
-              $assigned_roles[] = $this->getIdInArray($roles, 'edit_user');
-              $assigned_roles[] = $this->getIdInArray($roles, 'delete_user');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'create_admin');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'create_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'create_user');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_user');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_user');
               break;
             case 'student':
-              $assigned_roles[] = $this->getIdInArray($roles, 'book_a_book');
+              $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
               break;
             case 'admin':
-                $assigned_roles[] = $this->getIdInArray($roles, 'create_book');
-                $assigned_roles[] = $this->getIdInArray($roles, 'edit_book');
-                $assigned_roles[] = $this->getIdInArray($roles, 'delete_book');
-                $assigned_roles[] = $this->getIdInArray($roles, 'create_user');
-                $assigned_roles[] = $this->getIdInArray($roles, 'edit_user');
-                $assigned_roles[] = $this->getIdInArray($roles, 'delete_user');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'create_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'create_user');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_user');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_user');
                 break;
             case 'lecturer':
-                $assigned_roles[] = $this->getIdInArray($roles, 'book_a_book');
-                $assigned_roles[] = $this->getIdInArray($roles, 'get_discount');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
+                $assigned_permissions[] = $this->getIdInArray($permissions, 'get_discount');
                 break;
             default:
                 // throw new \Exception("The employee status entered does not exist");
         }
 
-        $this->roles()->attach($assigned_roles);
+        $this->permissions()->attach($assigned_permissions);
     }
 		/**
-		* Add roles to user to make them a concierge
+		* Add permissions to user to make them a concierge
 		*/
 		// public function setMakeEmployeeAttribute($title){
 		//
 		//
 		// }
 
-		// public function getRolesAttribute($value)
+		// public function getpermissionsAttribute($value)
     // {
     //     return explode(', ', $value);
     // }

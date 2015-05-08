@@ -1,0 +1,45 @@
+body{
+  /*background: url("/images/antique-library-desk-photography-hd-wallpaper-1920x1200-4655.jpg");*/
+}
+
+.navbar{
+  /*background-color: #FF0000;*/
+}
+
+/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #e7e7e7;
+  color: #FF0000;
+}*/
+
+.navbar-default .navbar-nav > li > a {
+    color: #000;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.small{
+  color: #FFF;
+}
+
+.wrapper {
+  margin: 0;
+  padding: 0;
+  /*color: #B0BEC5;*/
+  /*color: #FFF;*/
+  /*display: table;*/
+  /*font-family: 'Lato';*/
+}
+
+.title {
+display: table;
+/*font-family: 'Lato';*/
+/*color: #Fff;*/
+margin-bottom: 40px;
+}
+

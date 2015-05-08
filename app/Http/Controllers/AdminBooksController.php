@@ -10,7 +10,7 @@ use \Session as Session;
 use \Validator as Validator;
 use App\Book;
 use App\Cover;
-use App\Category;
+use App\BookCategory;
 use App\Booking;
 use Carbon\Carbon;
 use App\Http\Requests\BooksRequest;
@@ -21,8 +21,8 @@ class AdminBooksController extends Controller {
 	{
 		\Debugbar::enable();
 		$this->middleware('auth');
-    $category_keys = Category::oldest("name")->lists("name","id");
-    $categories = Category::with("books")->get();
+    $category_keys = BookCategory::oldest("name")->lists("name","id");
+    $categories = BookCategory::with("books")->get();
     view()->share(compact("categories","category_keys"));
 	}
 	/**
@@ -33,7 +33,7 @@ class AdminBooksController extends Controller {
 	public function index()
 	{
 		// $books = \DB::select("select *from books");
-		$books = Book::with("cover")->paginate(10);
+		$books = Book::with("cover")->with("book_category")->paginate(10);
 		return view ("admin.pages.books.index",compact('books'));
 	}
 
@@ -68,8 +68,7 @@ class AdminBooksController extends Controller {
     $image = $request->all();
 		$image["image"] = $imageName;
     $imagem = Cover::create($image);
-		$book->cover()->save($imagem);
-
+		$book->cover()->save($imagem);		
 		return redirect()->route('admin.books.index')->with('flash_notice', 'New Book created');
 	}
 
@@ -140,22 +139,23 @@ class AdminBooksController extends Controller {
 	{   
 	  $user = Auth::User();
 	  $data = $request->all();
+	  if(!array_key_exists("booker_id" ,$data)){
+	  	return redirect()->back()->withInput()->withErrors('cannot book now');
+	  }
 	  $book = Book::find($data["book_id"]);
 	  $data["booker_id"] = $user->id;
 	  $start_date = new Carbon($data["start_date"]);
 	  $end_date = new Carbon($data["end_date"]);
 	  $num_days = $start_date->diff($end_date)->days;
-	   if($end_date < $start_date){
+
+	  if($end_date < $start_date){
 	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
 	  }
-
 	  $num_days = $start_date->diff($end_date)->days;
-	  // dd($num_days);
 		if($num_days <=  0)
 		{
 			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
 		}
-
 		if(!$book->avail_books >= $data["num_booked"]){
 	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
 	  }

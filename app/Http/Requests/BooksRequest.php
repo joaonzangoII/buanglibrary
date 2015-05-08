@@ -33,7 +33,7 @@ class BooksRequest extends Request {
 			"isbn"     =>"required|numeric|digits:13",
 			"total_num_books"     =>"required",
 			"year"     =>"required|numeric|digits:4|digits:4",
-			"category_id"     =>"required",
+			"book_category_id"     =>"required",
 			"price"     =>"required|numeric",
 			"published_at"     =>"required",
 		];

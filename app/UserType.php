@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model {
+class UserType extends Model {
 
-	protected $table = 'types';
+	protected $table = 'user_types';
 
   public function users()
   {

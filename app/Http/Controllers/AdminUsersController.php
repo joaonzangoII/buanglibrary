@@ -17,7 +17,7 @@ class AdminUsersController extends Controller {
 		// $emp_keys = Type::oldest("name")->lists("name","name");
 		// dd(\Auth::User());
 		if(!\Auth::guest())
-			if(\Auth::User()->hasRole("create_admin")==true)
+			if(\Auth::User()->hasPermission("create_admin")==true)
 	    {
 				$emp_keys = ["admin" =>"admin","lecturer" =>"lecturer","student"=>"student"];
 		  }
@@ -29,8 +29,8 @@ class AdminUsersController extends Controller {
   }
 	public function index()
 	{
-		$users = \DB::select("select *from users");
-		$users = User::with("books")->with("roles")->paginate(10);
+		// $users = \DB::select("select *from users");
+		$users = User::with("books")->with("permissions")->paginate(10);
 		return view("admin.pages.users.index",compact('users'));
 	}
 

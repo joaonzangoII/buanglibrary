@@ -12,7 +12,7 @@
           <tr>
             <th>Name</th>
             <th>email</th>
-            <th>Roles</th>
+            <th>Permissions</th>
             <th>User Type</th>
           </tr>
           @foreach($users as $key => $employee)
@@ -20,8 +20,8 @@
                <td>{{$employee->fullname}}</td>
                <td>{{$employee->email}}</td>
                <td>
-                 @foreach ($employee->roles as $role)
-                  {{ $role->name }}
+                 @foreach ($employee->permissions as $permission)
+                  {{ $permission->name }}
                  @endforeach
                </td>
                <td>{{$employee->user_type}}</td>

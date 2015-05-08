@@ -24,7 +24,7 @@ class CreateBooksTable extends Migration {
 			$table->string("total_num_books");
 			$table->string("avail_books");
 			$table->string("year");
-			$table->integer("category_id");
+			$table->integer("book_category_id");
 			$table->decimal("price");
 			$table->string("slug");
 			$table->string("cover_id");

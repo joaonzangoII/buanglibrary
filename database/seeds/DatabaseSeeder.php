@@ -14,88 +14,88 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
     DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-    $this->call('UserRoleTableSeeder');
-    $this->call('TypeTableSeeder');
-    $this->call('RoleTableSeeder');
+    $this->call('UserPermissionTableSeeder');
+    $this->call('UserTypeTableSeeder');
+    $this->call('PermissionTableSeeder');
     $this->call('UserTableSeeder');
-    $this->call('CategoryTableSeeder');
+    $this->call('BookCategoryTableSeeder');
     DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }
 
-class TypeTableSeeder extends Seeder {
+class UserTypeTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
-        \App\Type::truncate();
+        \App\UserType::truncate();
         
-        \App\Type::create( [
+        \App\UserType::create( [
             'name' => 'super_admin' ,
         ] );
-         \App\Type::create( [
+         \App\UserType::create( [
             'name' => 'admin' ,
         ] );
 
-        \App\Type::create( [
+        \App\UserType::create( [
             'name' => 'student' ,
         ] );
 
-        \App\Type::create( [
+        \App\UserType::create( [
             'name' => 'lecturer' ,
         ] );
     }
 }
 
-class UserRoleTableSeeder extends Seeder {
+class UserPermissionTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
-        \App\UserRole::truncate();
+        \App\UserPermission::truncate();
     }
 }
-class RoleTableSeeder extends Seeder {
+class PermissionTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
-        \App\Role::truncate();
+        \App\Permission::truncate();
 
-         \App\Role::create( [
+         \App\Permission::create( [
             'name' => 'edit_book' ,
         ]);
 
-        \App\Role::create( [
+        \App\Permission::create( [
             'name' => 'delete_book' ,
         ]);
-        \App\Role::create( [
+        \App\Permission::create( [
             'name' => 'create_book' ,
         ]);
-        \App\Role::create( [
+        \App\Permission::create( [
           'name' => 'book_a_book' ,
         ]); 
-        \App\Role::create( [
+        \App\Permission::create( [
           'name' => 'create_admin' ,
         ]);
     }
 }
 
-class CategoryTableSeeder extends Seeder {
+class BookCategoryTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
-        \App\Category::truncate();
+        \App\BookCategory::truncate();
 
-         \App\Category::create( [
+         \App\BookCategory::create( [
             'name' => 'DRAMA' ,
         ]);
 
-        \App\Category::create( [
+        \App\BookCategory::create( [
             'name' => 'ENVIRONMENT' ,
         ]);
 
-        \App\Category::create( [
+        \App\BookCategory::create( [
             'name' => 'POETRY' ,
         ]);
-        \App\Category::create( [
+        \App\BookCategory::create( [
             'name' => 'SCIENCE AND TECHNOLOGY  ' ,
         ]);
-        \App\Category::create( [
+        \App\BookCategory::create( [
             'name' => 'TRAVEL AND CULTURE' ,
         ]);
     }
@@ -108,15 +108,15 @@ class UserTableSeeder extends Seeder {
         \App\User::truncate();
 
 				$user = \App\User::create( [
-            'email' => 'dbs@tut.ac.za' ,
-            'password' => "dbs" ,
-            'fname' => 'DBS' ,
-            'lname' => 'Subject' ,
-            'fullname' => '' ,
-            'address' => 'address' ,
-            'user_type' => 'admin' ,
-            'user_number' => 'ADM00001' ,
-        ]);
+          'email' => 'dbs@tut.ac.za' ,
+          'password' => "dbs" ,
+          'fname' => 'DBS' ,
+          'lname' => 'Subject' ,
+          'fullname' => '' ,
+          'address' => 'address' ,
+          'user_type' => 'admin' ,
+          'user_number' => 'ADM00001' ,
+      ]);
 
 				$user->makeEmployee('admin');
 

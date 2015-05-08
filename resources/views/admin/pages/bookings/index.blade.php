@@ -2,8 +2,7 @@
 @extends("admin.layouts.master")
   @section("content")
   <div class="container-fluid">
-   @if(count($bookings))
-   {{-- {{ dd("here") }} --}}
+   @if(count($bookings)>0)
     <div class="row">
       <div class="col-md-12">
         <h1>Available Bookings</h1>

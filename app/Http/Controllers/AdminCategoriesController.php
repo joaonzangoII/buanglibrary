@@ -9,16 +9,16 @@ use \Auth as Auth;
 use \Session as Session;
 use \Validator as Validator;
 use App\Book;
-use App\Category;
-use App\Http\Requests\CategoriesRequest;
+use App\BookCategory;
+use App\Http\Requests\BookCategoriesRequest;
 class AdminCategoriesController extends Controller {
 
 	public function __construct()
 	{
 		\Debugbar::enable();
 		$this->middleware('auth');
-    $category_keys = Category::oldest("name")->lists("name","id");
-    $categories = Category::with("books")->get();
+    $category_keys = BookCategory::oldest("name")->lists("name","id");
+    $categories = BookCategory::with("books")->get();
     view()->share(compact("categories","category_keys"));
 	}
 	/**
@@ -28,8 +28,8 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function index()
 	{
-		$categories = \DB::select("select *from categories");
-		$categories = Category::with("books")->paginate(10);
+		$categories = \DB::select("select *from book_categories");
+		$categories = BookCategory::with("books")->paginate(10);
 		return view("admin.pages.categories.index",compact('categories'));
 	}
 
@@ -48,9 +48,9 @@ class AdminCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CategoriesRequest $request)
+	public function store(BookCategoriesRequest $request)
 	{
-		\DB::insert('insert into categories (name) values (?)', array($request->input('name')));
+		\DB::insert('insert into book_categories (name) values (?)', array($request->input('name')));
 
 		return redirect()->route('admin.categories.index')->with('flash_notice', 'New category created');
 

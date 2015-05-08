@@ -2,11 +2,11 @@
 @extends("admin.layouts.master")
   @section("content")
   <div class="container-fluid">
-    @if(count($books))
+    @if(count($books)>0)
      {{-- {{ dd("here") }} --}}
       <div class="row">
         <div class="col-md-12">
-          {{ Auth::User()->type }}
+          {{ Auth::User()->user_type }}
           <h1>Available Books</h1>
           <hr>
           <table class="table table-condensed table-striped">
@@ -22,7 +22,7 @@
               <th>Year</th>
               <th>Price Per Book</th>
               <th>Added by</th>
-              <th>Category</th>
+              <th>Book Category</th>
               <th>Actions</th>
             </tr>
             @foreach($books as $key => $value)
@@ -42,7 +42,7 @@
                   <td>{{$value->year}}</td>
                   <td>{{$value->price}}</td>
                   <td>{{$value->user->fullname}}</td>
-                  <td>{{$value->category->name}}</td>
+                  <td>{{$value->book_category->name}}</td>
                   @if(Auth::User()->user_type ==="admin" || Auth::User()->user_type ==="super_admin")
                     <td class="center">
                       @include("admin.partials._actions_admins")
@@ -52,9 +52,7 @@
                       @include("admin.partials._actions_normal")
                     </td>
                   @endif
-                 {{-- <td>
-                 <img width="50px" src="/{{ $image->image->src }}" alt="" />
-               </td> --}}
+
                 </tr>
               @endforeach
           </table>

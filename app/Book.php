@@ -21,7 +21,7 @@ class Book extends Model implements SluggableInterface{
     "year",
     "price",
     "user_id",
-    "category_id",
+    "book_category_id",
     "published_at"
   ];
 
@@ -39,12 +39,8 @@ class Book extends Model implements SluggableInterface{
     return $this->hasOne("App\Cover");
   }
   
-  // public function getCoverAttribute($cover){
-  //   return "hello/" . $cover;
-  // }
-
-	public function category(){
-		return $this->belongsTo("App\Category");
+	public function book_category(){
+		return $this->belongsTo("App\BookCategory");
 	}
 
    public function booking()

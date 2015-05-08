@@ -46,8 +46,8 @@
             {!! Form::text('price', Input::old('price'), array('class' => 'form-control', 'placeholder' => 'price')) !!}
           </div>
           <div class="form-group">
-            {!! Form::label('category_id', 'Category') !!}
-            {!! Form::select('category_id', $category_keys,null, array('class' => 'form-control', 'placeholder' => 'categoria')) !!}
+            {!! Form::label('book_category_id', 'Book Category') !!}
+            {!! Form::select('book_category_id', $category_keys,null, array('class' => 'form-control', 'placeholder' => 'Book Category')) !!}
           </div>
           <div class="form-group">
               {!! Form::label('published_at', 'Publicado em') !!}

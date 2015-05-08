@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model{
-    protected $table = 'roles';
+class Permission extends Model{
+    protected $table = 'permissions';
     /**
      * Set timestamps off
      */
@@ -14,6 +14,6 @@ class Role extends Model{
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'users_roles');
+        return $this->belongsToMany('App\User', 'users_permissions');
     }
 }
