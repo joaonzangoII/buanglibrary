@@ -27,7 +27,7 @@ class UsersRequest extends Request {
 			'address'  =>"required",
 			'email'  =>"required|email|unique:users,email",
 			'password'  =>"required|min:6",
-			'phone'  =>"required",
+			'phone'  =>"required|numeric|digits:10|digits:10",
 		];
 	}
 
