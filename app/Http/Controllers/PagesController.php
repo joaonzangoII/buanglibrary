@@ -33,7 +33,11 @@ class PagesController extends Controller {
 		$books = Book::with("cover")->paginate(10);
 		return view('site.pages.index',compact("books"));
 	}
-
+  public function test()
+	{
+		$books = Book::with("cover")->paginate(10);
+		return view('site.pages.test',compact("books"));
+	}
 	public function about_us()
 	{
 		return view('site.pages.about');

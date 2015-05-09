@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::post('/contact', 'MailController@index');
+// Route::get('/test', 'PagesController@test');
 Route::get('about-us', 'PagesController@about_us');
 Route::get('contact-us', 'PagesController@contact_us');
 Route::get('/search',array('as' => 'procurar','uses' => "SearchController@search"));

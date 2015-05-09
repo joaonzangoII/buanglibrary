@@ -21,6 +21,7 @@ class AdminController extends Controller {
 	public function index()
 	{
     $books = \DB::select("select *from books");
+    // dd("here down");
 		return view ("admin.pages.index",compact('books'));
 	}
 }

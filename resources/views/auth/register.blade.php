@@ -1,5 +1,5 @@
 <!-- Page Content -->
-@extends("admin.layouts.master")
+@extends("app")
   @section("content")
   <div class="container-fluid">
       <div class="col-md-12">
