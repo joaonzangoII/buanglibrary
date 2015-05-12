@@ -61,7 +61,7 @@ class AdminUsersController extends Controller {
 	{
 		$user = User::create($request->all());
 		$user->makeEmployee($request->input("user_type"));
-		$this->auth->login($this->registrar->create($request->all()));
+		// $this->auth->login($this->registrar->create($request->all()));
 		return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
 	}
 
