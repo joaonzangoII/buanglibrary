@@ -33,11 +33,11 @@
                <td>{{$value->user[0]->fullname}}</td>
                @if(Auth::User()->isAdmin())
                  <td class="center">
-                   @include("admin.pages.bookings.partials._actions")
+                   @include("admin.pages.bookings.partials._actions_admins")
                  </td>
                @else
                  <td class="center">
-                   @include("admin.pages.bookings.partials._actions")
+                   @include("admin.pages.bookings.partials._actions_normal")
                  </td>
                @endif
               </tr>
