@@ -67,9 +67,10 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function show($id)
 	{
-		if(!Auth::User()->isAdmin()){
-			return redirect()->route("admin.forbidden");
-		}
+		// if(!Auth::User()->isAdmin()){
+		// 	return redirect()->route("admin.forbidden");
+		// }
+	  return view ("admin.pages.categories.show");
 	}
 
 	/**
