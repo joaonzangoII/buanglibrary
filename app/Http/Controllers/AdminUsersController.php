@@ -4,15 +4,17 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Type;
 use App\User;
+use Illuminate\Contracts\Auth\Guard;
 use \Auth as Auth;
 use \Session as Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 
 class AdminUsersController extends Controller {
-
-	public function __construct()
+ 	protected $auth;
+	public function __construct(Guard $auth)
   {
+  	$this->auth = $auth;
     \Debugbar::enable();
   	$this->middleware('auth',['except' => 'store']);
 		$emp_keys = array();
@@ -61,8 +63,10 @@ class AdminUsersController extends Controller {
 	{
 		$user = User::create($request->all());
 		$user->makeEmployee($request->input("user_type"));
-		// $this->auth->login($this->registrar->create($request->all()));
-		return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
+		// dd($this->auth);
+		$this->auth->login($user);
+		return redirect("/admin");
+		// return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
 	}
 
 	/**
