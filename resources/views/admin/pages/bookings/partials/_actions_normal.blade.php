@@ -1,2 +1,1 @@
   <a class="btn btn-s btn-dangerr" href="{{ route("admin.bookings.show",$value->id) }}"><i class="fa fa-eye text-info" data-toggle="tooltip" data-placement="top" title="view"></i></a>
-  <a class="btn btn-s btn-dangerr" href="{{ route("admin.bookings.one",$value->id) }}"><i class="fa fa-book text-info" data-toggle="tooltip" data-placement="top" title="Book"></i></a>
