@@ -164,9 +164,11 @@ class AdminBookingsController extends Controller {
 	  	return redirect()->back()->withInput()->withErrors('There are no books available');
 	  }
 	  $book = Book::find($data["book_id"]);
-	  if(!array_key_exists("booker_id" ,$data)){
-	  	return redirect()->back()->withInput()->withErrors('cannot book now');
-	  }
+	  // if(Auth::isAdmin())
+	  // else
+	  // if(!array_key_exists("booker_id" ,$data)){
+	  // 	return redirect()->back()->withInput()->withErrors('cannot book now');
+	  // }
 	  $data["booker_id"] = $user->id;
 	  $start_date = new Carbon($data["start_date"]);
 	  $end_date = new Carbon($data["end_date"]);
