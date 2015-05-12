@@ -166,6 +166,7 @@ return [
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Laracasts\Utilities\JavaScript\JavascriptServiceProvider',
 		'Dinesh\Barcode\BarcodeServiceProvider',
+		'Bkwld\Croppa\ServiceProvider',
 
 	],
 
@@ -234,6 +235,7 @@ return [
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 		'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
     'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
+    'Croppa' => 'Bkwld\Croppa\Facade',
 
 	],
 

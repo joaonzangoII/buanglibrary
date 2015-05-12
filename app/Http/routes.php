@@ -21,12 +21,14 @@ Route::get('/book/booking',["uses"=>"BooksController@book", "as" =>"book.booking
 Route::get('/book/{books}',"BooksController@index");
 
 Route::get('admin', 'AdminController@index');
-Route::get('admin/books/booking/{books}', array("uses" => 'AdminBooksController@getBooking', "as" =>"admin.getBooking"));
-Route::post('admin/books/booking', array("uses" => 'AdminBooksController@postBooking', "as" =>"admin.postBooking"));
+Route::get('admin/books/booking-any', array("uses" => 'AdminBookingsController@create_any_booking', "as" =>"admin.bookings.any"));
+Route::get('admin/books/booking/{books}', array("uses" => 'AdminBookingsController@create_booking', "as" =>"admin.bookings.one"));
+Route::post('admin/books/booking', array("uses" => 'AdminBookingsController@store_booking', "as" =>"admin.bookings.user.store"));
 Route::resource('admin/books', 'AdminBooksController');
 Route::resource('admin/categories', 'AdminCategoriesController');
 Route::resource('admin/users', 'AdminUsersController');
 Route::resource('admin/bookings', 'AdminBookingsController');
+Route::get('admin/forbidden', array("uses" => "AdminController@forbidden", "as"=>"admin.forbidden"));
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -18,12 +18,20 @@
 </div>
 @section("scripts")
 <script type="text/javascript">  
+//Making the first  letter uppercase
+String.prototype.toProperCase = function(){
+    return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
+        function($1){
+            return $1.toUpperCase();
+        }
+    );
+};
 // <!-- Dialog show event handler -->
 $('#confirmDelete').on('show.bs.modal', function (e) {
-    $message = $(e.relatedTarget).attr('data-message');
+    $message = 'Are you sure you want to delete this {!! $value !!}?';//$(e.relatedTarget).attr('data-message');
     $(this).find('.modal-body p').text($message);
-    $title = $(e.relatedTarget).attr('data-title');
-    $(this).find('.modal-title').text($title);
+    $title = 'Delete {!! $value !!}';//$(e.relatedTarget).attr('data-title');
+    $(this).find('.modal-title').text($title.toProperCase());
 
     // Pass form reference to modal for submission on yes/ok
     var form = $(e.relatedTarget).closest('form');

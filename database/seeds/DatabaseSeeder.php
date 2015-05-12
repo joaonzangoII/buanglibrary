@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder {
     $this->call('PermissionTableSeeder');
     $this->call('UserTableSeeder');
     $this->call('BookCategoryTableSeeder');
+    $this->call('BooksTableSeeder');
+    $this->call('BookingsTableSeeder');
     DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
@@ -49,6 +51,12 @@ class UserPermissionTableSeeder extends Seeder {
    //bcrypt = Hash::Make
     public function run() {
         \App\UserPermission::truncate();
+    }
+}
+class BookingsTableSeeder extends Seeder {
+   //bcrypt = Hash::Make
+    public function run() {
+        \App\Booking::truncate();
     }
 }
 class BookingUserTableSeeder extends Seeder {
@@ -121,60 +129,93 @@ class BookCategoryTableSeeder extends Seeder {
 
 
 class UserTableSeeder extends Seeder {
-   //bcrypt = Hash::Make
-    public function run() {
-        \App\User::truncate();
+ //bcrypt = Hash::Make
+  public function run() {
+    \App\User::truncate();
+    $faker = Faker\Factory::create();
+    $user = \App\User::create( [
+      'email' => 'dbs@tut.ac.za' ,
+      'password' => "dbs" ,
+      'fname' => 'DBS' ,
+      'lname' => 'Subject' ,
+      'fullname' => '' ,
+      'address' => $faker->address ,
+      'user_type' => 'admin' ,
+      'user_number' => 'ADM00001' ,
+    ]);
 
-				$user = \App\User::create( [
-          'email' => 'dbs@tut.ac.za' ,
-          'password' => "dbs" ,
-          'fname' => 'DBS' ,
-          'lname' => 'Subject' ,
-          'fullname' => '' ,
-          'address' => 'address' ,
-          'user_type' => 'admin' ,
-          'user_number' => 'ADM00001' ,
-      ]);
-
-				$user->makeEmployee('admin');
-
-
-        $user = \App\User::create( [
-            'email' => 'jm@tut.ac.za' ,
-            'password' => "dbs" ,
-            'fname' => 'Jo' ,
-            'lname' => 'DB' ,
-            'fullname' => '' ,
-            'address' => 'address' ,
-            'user_type' => 'super_admin' ,
-            'user_number' => 'SPR00001' ,
-        ]);
-
-        $user->makeEmployee('super_admin');
-
-        $user = \App\User::create( [
-            'email' => 'joaonzango@gmail.com' ,
-            'password' => "dbs" ,
-            'fname' => 'Joao' ,
-            'lname' => 'Nzango' ,
-            'fullname' => '' ,
-            'address' => 'address' ,
-            'user_type' => 'student' ,
-            'user_number' => 'ST00001' ,
-        ]);
-
-        $user = \App\User::create( [
-            'email' => 'joaonzango@gmail.comm' ,
-            'password' => "dbs" ,
-            'fname' => 'Julio' ,
-            'lname' => 'Nzango' ,
-            'fullname' => '' ,
-            'address' => 'address' ,
-            'user_type' => 'lecturer' ,
-            'user_number' => 'LEC00001' ,
-        ]);
+    $user->makeEmployee('admin');
 
 
-        $user->makeEmployee('lecturer');
-    }
+    $user = \App\User::create( [
+        'email' => 'jm@tut.ac.za' ,
+        'password' => "dbs" ,
+        'fname' => 'Jo' ,
+        'lname' => 'DB' ,
+        'fullname' => '' ,
+        'address' =>$faker->address ,
+        'user_type' => 'super_admin' ,
+        'user_number' => 'SPR00001' ,
+    ]);
+
+    $user->makeEmployee('super_admin');
+
+    $user = \App\User::create( [
+        'email' => 'joaonzango@gmail.com' ,
+        'password' => "dbs" ,
+        'fname' => 'Joao' ,
+        'lname' => 'Nzango' ,
+        'fullname' => '' ,
+        'address' => $faker->address,
+        'user_type' => 'student' ,
+        'user_number' => 'ST00001' ,
+    ]);
+
+    $user = \App\User::create( [
+        'email' => 'joaonzangoii@hotmail.com' ,
+        'password' => "dbs" ,
+        'fname' => 'Julio' ,
+        'lname' => 'Nzango' ,
+        'fullname' => '' ,
+        'address' => $faker->address,
+        'user_type' => 'lecturer' ,
+        'user_number' => 'LEC00001' ,
+    ]);
+
+    $user->makeEmployee('lecturer');
+  }
 }
+
+  class BooksTableSeeder extends Seeder {
+    //bcrypt = Hash::Make
+    public function run() {
+      \App\Book::truncate();
+      \App\Cover::truncate();
+      $user = \App\User::find(1);
+      $categories = \App\BookCategory::all();
+      $faker = Faker\Factory::create();
+      $covers = ["1.jpg","2.jpg","3.jpg"];
+      for ($i=0; $i < 3; $i++) { 
+        $number = $faker->randomNumber(2);
+        $cover = \App\Cover::create([
+          "image" => $covers[$i],
+          "alt" => "",
+        ]);
+        $book = \App\Book::create([
+          "title" => $faker->text($maxNbChars = 50),
+          "author" => $faker->name,
+          "edition" => "1st",
+          "isbn" => $faker->ean13,
+          "total_num_books" => $number,
+          "avail_books" => $number,
+          "year"=> $faker->year($max = 'now') ,
+          "price" => $faker->randomNumber(2),
+          "user_id" =>  $user->id,
+          "book_category_id" => $categories[$i]->id,
+          "published_at" =>new DateTime(),
+        ]); 
+
+        $book->cover()->save($cover);      
+      }
+    }
+  }

@@ -31,6 +31,9 @@ class AdminUsersController extends Controller {
   }
 	public function index()
 	{
+		if(!Auth::User()->isAdmin()){
+			return redirect()->route("admin.forbidden");
+		}
 		// $users = \DB::select("select *from users");
 		$users = User::with("books")->with("permissions")->paginate(10);
 		return view("admin.pages.users.index",compact('users'));
@@ -43,6 +46,9 @@ class AdminUsersController extends Controller {
 	 */
 	public function create()
 	{
+		if(!Auth::User()->isAdmin()){
+			return redirect()->route("admin.forbidden");
+		}
 		return view ("admin.pages.users.create");
 	}
 
@@ -55,7 +61,8 @@ class AdminUsersController extends Controller {
 	{
 		$user = User::create($request->all());
 		$user->makeEmployee($request->input("user_type"));
-		return redirect()->route('admin.users.index')->with('flash_notice', 'New category created');
+		$this->auth->login($this->registrar->create($request->all()));
+		return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
 	}
 
 	/**
@@ -77,6 +84,9 @@ class AdminUsersController extends Controller {
 	 */
 	public function edit(User $user)
 	{
+		if(!Auth::User()->isAdmin()){
+			return redirect()->route("admin.forbidden");
+		}
 		return view ("admin.pages.users.edit",compact("user"));
 	}
 

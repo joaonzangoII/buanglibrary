@@ -22,8 +22,8 @@
 					 <li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Users <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ route('admin.users.index') }}">All</a></li>
-							<li><a href="{{ route('admin.users.create') }}">Add</a></li>
+							<li><a href="{{ route('admin.users.index') }}">View All</a></li>
+							<li><a href="{{ route('admin.users.create') }}">Create</a></li>
 							<!-- <li><a href="{{ route('admin.books.index') }}">Logout</a></li> -->
 						</ul>
 					  </li>
@@ -31,30 +31,33 @@
             <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Books <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ route('admin.books.index') }}">All</a></li>
+								<li><a href="{{ route('admin.books.index') }}">View All</a></li>
 								@if(Auth::User()->isAdmin())
-									<li><a href="{{ route('admin.books.create') }}">Add</a></li>
+									<li><a href="{{ route('admin.books.create') }}">Create</a></li>
 								@endif
 								<!-- <li><a href="{{ route('admin.books.index') }}">Logout</a></li> -->
 							</ul>
 						</li>
-						@if(Auth::User()->isAdmin())
+						
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Book Categories <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="{{ route('admin.categories.index') }}">All</a></li>
-									<li><a href="{{ route('admin.categories.create') }}">Add</a></li>
+									<li><a href="{{ route('admin.categories.index') }}">View All</a></li>
+									@if(Auth::User()->isAdmin())
+										<li><a href="{{ route('admin.categories.create') }}">Create</a></li>
+						      @endif
 									<!-- <li><a href="{{ route('admin.books.index') }}">Logout</a></li> -->
 								</ul>
 							</li>
-						@endif
 {{-- 						@if(Auth::User()->isAdmin()) --}}
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bookings <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="{{ route('admin.bookings.index') }}">All</a></li>
+									<li><a href="{{ route('admin.bookings.index') }}">View All</a></li>
 									@if(Auth::User()->isAdmin())
-										<li><a href="{{ route('admin.bookings.create') }}">Add</a></li>
+										<li><a href="{{ route('admin.bookings.create') }}">Create</a></li>
+									@else
+										<li><a class="disabled" href="{{ route('admin.bookings.any') }}">Create</a></li>
 									@endif
 								</ul>
 							</li>
@@ -79,13 +82,35 @@
 			</div>
 		</div>
 	</nav>
-	@yield('content')
+<div id="page-wrapper">
+	<div class="container-fluid">
+		<!-- <div class="row"> -->
+		<div class="col-lg-12">
+			@if (Session::has('flash_notice'))
+				<div class="alert alert-success alert-dismissable" id="success-alert">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{ Session::get('flash_notice') }}
+				</div>
+			@endif
+			@yield('content')
+		</div>
+	</div>
+</div>
 
 	<!-- Scripts -->
 	<script src="/assets/admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/admin/js/jquery-ui.js"></script>
 	<script src="/assets/admin/js/bootstrap.min.js"></script>
 	<script src="/assets/admin/js/select2.min.js"></script>
   <script src="/assets/admin/js/bootstrap-toggle.min.js"></script>
+  <script type="text/javascript"  src="/assets/admin/js/chart.min.js"></script>
   @yield('scripts')
+  <script type="text/javascript">
+	 window.setTimeout(function() {
+	  $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+	      $(this).remove();
+	  });
+	  }, 5000);
+  </script>
 </body>
 </html>

@@ -45,6 +45,6 @@
       </div>
     </div>
    @endif
-   @include("admin.dialogs.delete_confirm")
+   @include("admin.dialogs.delete_confirm",["value"=> "user"])
 </div>
 @endsection

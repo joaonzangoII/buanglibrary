@@ -45,6 +45,24 @@ class RouteServiceProvider extends ServiceProvider {
 			}
 		});
 
+		$router->bind("bookings",function($id){
+			try {
+				// dd($id);
+			  return \App\Booking::findOrfail($id);
+			} catch ( ModelNotFoundException $e ) {
+			  return abort("404");
+			}
+		});
+
+		$router->bind("categories",function($id){
+			try {
+				// dd($id);
+			  return \App\BookCategory::findOrfail($id);
+			} catch ( ModelNotFoundException $e ) {
+			  return abort("404");
+			}
+		});
+
 	}
 
 	/**

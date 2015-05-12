@@ -10,20 +10,36 @@
         <table class="table table-condensed table-striped">
           <tr>
             <th>Book</th>
+            <th>Cover</th>
             <th># Booked</th>
             <th>Amount</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Booker</th>
+            <th>Actions</th>
           </tr>
-          @foreach($bookings as $key => $booking)
+          @foreach($bookings as $key => $value)
              <tr>
-               <td>{{$booking->book[0]->fulltitle}}</td>
-               <td>{{$booking->num_booked}}</td>
-               <td>{{$booking->amount}}</td>
-               <td>{{$booking->start_date}}</td>
-               <td>{{$booking->end_date}}</td>
-               <td>{{$booking->user[0]->fullname}}</td>
+               @if ($value->book[0]->cover)
+                 <td><img class="img-responsive img-thumbnail" src="{{ Croppa::url('/images/uploads/' . $value->book[0]->cover->image, 300, 200)}}" width="100" height="100" alt=""></td>
+               @else
+                 <td><img src="" alt=""></td>
+               @endif
+               <td>{{$value->book[0]->title}}</td>
+               <td>{{$value->num_booked}}</td>
+               <td>{{$value->amount}}</td>
+               <td>{{$value->start_date}}</td>
+               <td>{{$value->end_date}}</td>
+               <td>{{$value->user[0]->fullname}}</td>
+               @if(Auth::User()->isAdmin())
+                 <td class="center">
+                   @include("admin.pages.bookings.partials._actions")
+                 </td>
+               @else
+                 <td class="center">
+                   @include("admin.pages.bookings.partials._actions")
+                 </td>
+               @endif
               </tr>
             @endforeach
         </table>
@@ -38,5 +54,6 @@
       </div>
     </div>
    @endif
+  @include("admin.dialogs.delete_confirm",["value"=> "booking"])
   </div>
   @endsection

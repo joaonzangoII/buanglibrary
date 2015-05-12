@@ -11,8 +11,6 @@ class Book extends Model implements SluggableInterface{
   protected $fillable =
   [
     "title",
-    "name",
-    "title",
     "author",
     "edition",
     "isbn",
@@ -27,7 +25,7 @@ class Book extends Model implements SluggableInterface{
 
   protected $dates = ["published_at"];
   protected $sluggable = array(
-    'build_from' => 'fulltitle',
+    'build_from' => 'title',
     'save_to'    => 'slug',
     'on_update'  => true
   );
@@ -52,9 +50,9 @@ class Book extends Model implements SluggableInterface{
     return $query->where($field, 'LIKE', "%$value%");
   }
 
-   public function getFulltitleAttribute()
-   {  
-     // dd($this->name);
-     return $this->name . '-' . $this->title;
-   }
+   // public function getFulltitleAttribute()
+   // {  
+   //   // dd($this->name);
+   //   return $this->name . '-' . $this->title;
+   // }
 }

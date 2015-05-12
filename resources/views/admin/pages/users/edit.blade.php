@@ -49,6 +49,7 @@
             <div class="row">
               <div id="success"> </div>
               {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
+              <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a>
             </div>
           {{-- </div> --}}
         {!! Form::close() !!}

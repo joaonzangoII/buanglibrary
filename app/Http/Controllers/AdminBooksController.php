@@ -32,8 +32,11 @@ class AdminBooksController extends Controller {
 	 */
 	public function index()
 	{
-		// $books = \DB::select("select *from books");
 		$books = Book::with("cover")->with("book_category")->paginate(10);
+		// \Response::json($books);
+		// if(\Request::ajax()){
+		// 	return view ("admin.pages.books.index",compact('books'));
+		// }
 		return view ("admin.pages.books.index",compact('books'));
 	}
 
@@ -44,6 +47,9 @@ class AdminBooksController extends Controller {
 	 */
 	public function create()
 	{
+		if(!Auth::User()->isAdmin()){
+			return redirect()->route("admin.forbidden");
+		}
 		return view ("admin.pages.books.create",compact("categoria_keys"));
 	}
 
@@ -91,6 +97,9 @@ class AdminBooksController extends Controller {
 	 */
 	public function edit(Book $book)
 	{
+		if(!Auth::User()->isAdmin()){
+			return redirect()->route("admin.forbidden");
+		}
 		return view('admin.pages.books.edit',compact("categories","book"));
 	}
 
@@ -119,57 +128,14 @@ class AdminBooksController extends Controller {
     if($book->cover!=null){
 	    if (!\File::delete(public_path(). "/images/uploads/". $book->cover->image))
 			{
-				Session::flash('flash_notice', 'ERROR deleteing the File!');
+				Session::flash('flash_notice', 'ERROR deleting the File!');
 				return redirect()->route("admin.books.index");
 			}
 	  }
     // dd($book->cover->image);
+    $booking = Booking::where("book_id",$book->id)->delete();
 		$book->delete();
 		Session::flash('flash_notice', 'Successfully deleted the book!');
 		return redirect()->route("admin.books.index");
 	}
-
-	public function getBooking(Book $book)
-	{  
-		$book_keys = Book::lists("name","id");
-    return view('admin.pages.books.booking',compact("book","book_keys"));
-	}
-
-	public function postBooking(BookingsRequest $request)
-	{   
-	  $user = Auth::User();
-	  $data = $request->all();
-	  if(!array_key_exists("booker_id" ,$data)){
-	  	return redirect()->back()->withInput()->withErrors('cannot book now');
-	  }
-	  $book = Book::find($data["book_id"]);
-	  $data["booker_id"] = $user->id;
-	  $start_date = new Carbon($data["start_date"]);
-	  $end_date = new Carbon($data["end_date"]);
-	  $num_days = $start_date->diff($end_date)->days;
-
-	  if($end_date < $start_date){
-	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
-	  }
-	  $num_days = $start_date->diff($end_date)->days;
-		if($num_days <=  0)
-		{
-			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
-		}
-		if(!$book->avail_books >= $data["num_booked"]){
-	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
-	  }
-
-	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
-	  $data["amount"] = $amount;
-
-		$booking = Booking::create($data);
-    $user->bookings()->attach($booking);
-		$booking->book()->attach($book);
-    $book->decrement("avail_books",$data["num_booked"]);
-    $book->save();
-		Session::flash('flash_notice', 'Successfully booked this book!');
-    return redirect()->route("admin.bookings.index");
-	}
-
 }

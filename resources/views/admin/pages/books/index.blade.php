@@ -12,7 +12,6 @@
           <table class="table table-condensed table-striped">
             <tr>
               <th>Cover</th>
-              <th>Name</th>
               <th>Title</th>
               <th>Author</th>
               <th>Edition</th>
@@ -25,36 +24,7 @@
               <th>Book Category</th>
               <th>Actions</th>
             </tr>
-            @foreach($books as $key => $value)
-              <tr>
-                  @if ($value->cover)
-                    <td><img src="/images/uploads/{{$value->cover->image}}" width="100" alt=""></td>
-                  @else
-                    <td><img src="" alt=""></td>
-                  @endif
-                  <td>{{$value->name}}</td>
-                  <td>{{$value->title}}</td>
-                  <td>{{$value->author}}</td>
-                  <td>{{$value->edition}}</td>
-                  <td>{{$value->isbn}}</td>
-                  <td>{{$value->total_num_books}}</td>
-                  <td>{{$value->avail_books}}</td>
-                  <td>{{$value->year}}</td>
-                  <td>{{$value->price}}</td>
-                  <td>{{$value->user->fullname}}</td>
-                  <td>{{$value->book_category->name}}</td>
-                  @if(Auth::User()->user_type ==="admin" || Auth::User()->user_type ==="super_admin")
-                    <td class="center">
-                      @include("admin.partials._actions_admins")
-                    </td>
-                  @else
-                    <td class="center">
-                      @include("admin.partials._actions_normal")
-                    </td>
-                  @endif
-
-                </tr>
-              @endforeach
+            @include("admin.pages.books.partials._books_list")
           </table>
         </div>
         @else
@@ -67,9 +37,9 @@
         </div>
       </div>
      @endif
-     @include("admin.dialogs.delete_confirm")
+     @include("admin.dialogs.delete_confirm",["value"=> "book"])
   </div>
     @section("scripts")
-      @include("admin.partials._set_published")
+      @include("admin.partials._script")
     @endsection
   @endsection

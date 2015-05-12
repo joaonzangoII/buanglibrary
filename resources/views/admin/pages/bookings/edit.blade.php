@@ -12,69 +12,38 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-         {!! Form::model($book, array('method'=>"PATCH",'route' => ['admin.books.update',$book->slug], 'class' => 'form', 'files'=>true)) !!}
+         {!! Form::model($booking,array('method'=>"PATCH",'route' => ['admin.bookings.update',$booking->id], 'class' => 'form')) !!}
           <div class="form-group">
-            {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'name')) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('title', 'Title') !!}
-            {!! Form::text('title', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'title')) !!}
+            {!! Form::label('booker_id', 'User') !!}
+            {!! Form::select('booker_id', $user_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
           </div>
           <div class="form-group">
-            {!! Form::label('author', 'Author') !!}
-            {!! Form::text('author', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'author')) !!}
-          </div>
-           <div class="form-group">
-            {!! Form::label('edition', 'Edition') !!}
-            {!! Form::text('edition', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'edition')) !!}
+            {!! Form::label('book_id', 'Book') !!}
+            {!! Form::select('book_id', $book_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
           </div>
           <div class="form-group">
-            {!! Form::label('isbn', 'ISBN') !!}
-            {!! Form::text('isbn', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'isbn')) !!}
+            {!! Form::label('num_booked', 'Number to Book') !!}
+            {!! Form::text('num_booked', Input::old('num_booked'), array('class' => 'form-control', 'placeholder' => '# to book')) !!}
           </div>
+
           <div class="form-group">
-            {!! Form::label('total_num_books', 'Total # of books') !!}
-            {!! Form::text('total_num_books', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'total # of books')) !!}
+              {!! Form::label('start_date', 'From') !!}
+              {!! Form::input('date','start_date', $booking->start_date->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'Start date']) !!}
           </div>
+
           <div class="form-group">
-            {!! Form::label('year', 'Year Published') !!}
-            {!! Form::text('year', Input::old('titulo'), array('class' => 'form-control', 'placeholder' => 'year published')) !!}
+              {!! Form::label('end_date', 'To') !!}
+              {!! Form::input('date','end_date', $booking->end_date->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'End date']) !!}
           </div>
-          <div class="form-group">
-            {!! Form::label('price', 'Price') !!}
-            {!! Form::text('price', Input::old('price'), array('class' => 'form-control', 'placeholder' => 'price')) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('category_id', 'Category') !!}
-            {!! Form::select('category_id', $category_keys,null, array('class' => 'form-control', 'placeholder' => 'categoria')) !!}
-          </div>
-          <div class="form-group">
-              {!! Form::label('published_at', 'Publicado em') !!}
-              {!! Form::input('date','published_at', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'published']) !!}
-          </div>
-           <div class="control-group">
-             <div class="form-group">
-                {!! Form::label('alt', 'Image Alt') !!}
-                {!! Form::text('alt',Input::old('alt'),['class'=>'form-control', 'placeholder' => 'Image alt...']) !!}
-            </div>
-            <div class="controls">
-              {!! Form::file('image') !!}
-              <p class="help-block">Hey! Please don't upload over 15MB images!</p>
-              <p class="errors">{{$errors->first('image')}}</p>
-              @if(Session::has('error'))
-                <p class="errors">{{ Session::get('error') }}</p>
-              @endif
-            </div>
-          </div>
+
+
           <div id="success"> </div>
-          {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a>
         {!! Form::close() !!}
         </div>
       </div>
   </div>
-  {{-- SELECT `id`, `titulo`, `link`, `cantor`, `foto`, `descricao`, `categoria_id`, `created_at`, `updated_at` FROM `musicas` WHERE 1 --}}
-  <!-- /#page-content-wrapper -->
   @endsection
   @section("scripts")
     @include("admin.partials._select2")

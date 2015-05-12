@@ -2,7 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Book;
+use App\BookCategory;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -19,9 +20,21 @@ class AdminController extends Controller {
 	 * @return Response
 	 */
 	public function index()
+  {
+    // $books = \DB::select("select *from books");
+    // $book_categories = \DB::select("select *from book_categories");  
+    $books = Book::all();
+    // $book_categories = BookCategory::all();
+    $book_categories_list  = BookCategory::lists("name");
+    $book_categories  = BookCategory::with("books")->get();
+    $books_count  = [];
+    foreach ($book_categories as $key => $value) {
+      $books_count[] = $value->books->count();
+    }
+    return view ("admin.pages.index",compact('books','book_categories_list','books_count'));
+  }
+  public function forbidden()
 	{
-    $books = \DB::select("select *from books");
-    // dd("here down");
-		return view ("admin.pages.index",compact('books'));
+		return view ("admin.pages.forbidden");
 	}
 }

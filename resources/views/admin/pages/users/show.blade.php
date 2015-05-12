@@ -13,6 +13,7 @@
        @endforeach
      </ul>
      {{-- <p><b>permissions:</b> {{ $user->permissions }}</p> --}}
+     <p><a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a></p>
    </div>
    <div class="col-md-8">
     {{-- <img class="img-responsive img-thumbnail" src="/{{ $user->image->src }}" alt="{{ $user->alt }}"> --}}

@@ -12,11 +12,21 @@
           <tr>
             <th>Name</th>
             <th>Count</th>
+            <th>Action</th>
           </tr>
-          @foreach($categories as $key => $category)
+          @foreach($categories as $key => $value)
              <tr>
-               <td>{{$category->name}}</td>
-               <td>{{count($category->books)}}</td>
+               <td>{{$value->name}}</td>
+               <td>{{count($value->books)}}</td>
+               @if(Auth::User()->isAdmin())
+                 <td class="center">
+                   @include("admin.pages.categories.partials._actions_admins")
+                 </td>
+               @else
+                 <td class="center">
+                   @include("admin.pages.categories.partials._actions_normal")
+                 </td>
+               @endif
               </tr>
             @endforeach
         </table>
@@ -31,6 +41,6 @@
       </div>
     </div>
    @endif
-   @include("admin.dialogs.delete_confirm")
+   @include("admin.dialogs.delete_confirm",["value"=> "category"])
 </div>
 @endsection

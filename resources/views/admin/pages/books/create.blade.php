@@ -14,10 +14,6 @@
         <div class="col-md-6 col-md-offset-3">
          {!! Form::open(array('method'=>"POST",'action' => 'AdminBooksController@store', 'class' => 'form', 'files'=>true)) !!}
           <div class="form-group">
-            {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => 'name')) !!}
-          </div>
-          <div class="form-group">
             {!! Form::label('title', 'Title') !!}
             {!! Form::text('title', Input::old('title'), array('class' => 'form-control', 'placeholder' => 'title')) !!}
           </div>
@@ -68,7 +64,8 @@
             </div>
           </div>
           <div id="success"> </div>
-          {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a>
         {!! Form::close() !!}
         </div>
       </div>

@@ -12,8 +12,11 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-         {!! Form::open(array('method'=>"POST",'action' => 'AdminBooksController@postBooking', 'class' => 'form')) !!}
-            {!! Form::hidden('book_id', $book->id) !!}
+         {!! Form::open(array('method'=>"POST",'action' => 'AdminBookingsController@store_booking', 'class' => 'form')) !!}
+           <div class="form-group">
+             {!! Form::label('book_id', 'Book') !!}
+             {!! Form::select('book_id', $book_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
+           </div>
           <div class="form-group">
             {!! Form::label('num_booked', 'Number to Book') !!}
             {!! Form::text('num_booked', Input::old('num_booked'), array('class' => 'form-control', 'placeholder' => '# to book')) !!}
@@ -30,6 +33,7 @@
 
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a>
         {!! Form::close() !!}
         </div>
       </div>
