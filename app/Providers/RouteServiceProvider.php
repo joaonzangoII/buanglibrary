@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider {
 		// 	} catch ( ModelNotFoundException $e ) {
 		// 	  return abort("404");
 		// 	}
-		});
+		// });
 
 		$router->bind("users",function($id){
 			try {
