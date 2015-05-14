@@ -10,7 +10,7 @@
       <p><b>Discount? : </b>{{$booking->has_discount}}</td>
       <p><b>From:  </b>{{$booking->start_date}}</td>
       <p><b>To: </b>{{$booking->end_date}}</td>
-      <p><b>State: </b>{{$booking->state}}</td>
+      <p><b>Status: </b>{{$booking->state}}</td>
       <p><b>Booked By: </b>{{$booking->user[0]->fullname}}</td>
       <p><a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a></p>
       {{--  <p><b>title:</b> {{ $book->title }}</p>

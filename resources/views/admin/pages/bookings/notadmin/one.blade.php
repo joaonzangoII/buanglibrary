@@ -20,12 +20,12 @@
           </div>
           <div class="form-group">
               {!! Form::label('start_date', 'From') !!}
-              {!! Form::input('date','start_date', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'Start date']) !!}
+              {!! Form::input('datetime','start_date', Date("Y-m-d H:i:s") ,['class'=>'form-control', 'placeholder' => 'Start date']) !!}
           </div>
 
           <div class="form-group">
               {!! Form::label('end_date', 'To') !!}
-              {!! Form::input('date','end_date', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'End date']) !!}
+              {!! Form::input('datetime','end_date', Date("Y-m-d H:i:s"),['class'=>'form-control', 'placeholder' => 'End date']) !!}
           </div>
 
           <div id="success"> </div>

@@ -143,7 +143,7 @@ class AdminBookingsController extends Controller {
 			return redirect()->route("admin.forbidden");
 		}
 
-		$user_keys = User::whereIn("user_type",["lecturer","student"])->lists("fullname","id");
+		$user_keys = User::whereIn("user_type",["user"])->lists("fullname","id");
 		return view ("admin.pages.bookings.edit",compact("booking","book_keys","user_keys"));
 	}
 

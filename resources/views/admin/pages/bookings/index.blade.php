@@ -18,7 +18,7 @@
               <th>Discount?</th>
               <th>Start Date</th>
               <th>End Date</th>
-              <th>State</th>
+              <th>Status</th>
               <th>Booker</th>
               <th>Actions</th>
             </tr>
