@@ -48,7 +48,7 @@
           </div>
           <div class="form-group">
               {!! Form::label('published_at', 'Publicado em') !!}
-              {!! Form::input('date','published_at', $book->published_at->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'published']) !!}
+              {!! Form::input('datetime','published_at', $book->published_at->format('Y-m-d H:i:s'),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}

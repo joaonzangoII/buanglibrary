@@ -47,7 +47,7 @@
           </div>
           <div class="form-group">
               {!! Form::label('published_at', 'Available from') !!}
-              {!! Form::input('date','published_at', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'published']) !!}
+              {!! Form::input('datetime','published_at', Date("Y-m-d H:i:s"),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
            <div class="control-group">
        {{--       <div class="form-group">

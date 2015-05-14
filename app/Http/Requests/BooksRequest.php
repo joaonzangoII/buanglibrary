@@ -37,7 +37,7 @@ class BooksRequest extends Request {
 				"year"     =>"required|numeric|digits:4|digits:4",
 				"book_category_id"     =>"required",
 				"price"     =>"required|numeric",
-				"published_at"     =>"required",
+				"published_at"     =>"required|date_format:Y-m-d H:i:s",
 			];
 	  }
     else{
