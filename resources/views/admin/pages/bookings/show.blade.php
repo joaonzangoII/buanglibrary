@@ -4,7 +4,14 @@
   <div class="container-fluid">
     <h1><b>Booking</b></h1>
     <div class="col-md-4">
-      <p><b>Book Name:</b> {{ $booking->book[0]->fulltitle }}</p>
+      <p><b>Book Name:</b> {{ $booking->book[0]->title }}</p>
+      <p><b>Number Booked: </b>{{$booking->num_booked}}</td>
+      <p><b>Amount Due: </b>{{$booking->amount}}</td>
+      <p><b>Discount? : </b>{{$booking->has_discount}}</td>
+      <p><b>From:  </b>{{$booking->start_date}}</td>
+      <p><b>To: </b>{{$booking->end_date}}</td>
+      <p><b>State: </b>{{$booking->state}}</td>
+      <p><b>Booked By: </b>{{$booking->user[0]->fullname}}</td>
       <p><a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a></p>
       {{--  <p><b>title:</b> {{ $book->title }}</p>
       <p><b>ISBN:</b> {{ $book->isbn }}</p>
