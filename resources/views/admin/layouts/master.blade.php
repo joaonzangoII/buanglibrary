@@ -104,6 +104,7 @@
 	<script src="/assets/admin/js/select2.min.js"></script>
   <script src="/assets/admin/js/bootstrap-toggle.min.js"></script>
   <script type="text/javascript"  src="/assets/admin/js/chart.min.js"></script>
+  {!!Rapyd::scripts() !!}
   @yield('scripts')
   <script type="text/javascript">
 	 window.setTimeout(function() {

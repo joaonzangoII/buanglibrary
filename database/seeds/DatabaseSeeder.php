@@ -39,11 +39,7 @@ class UserTypeTableSeeder extends Seeder {
         ] );
 
         \App\UserType::create( [
-            'name' => 'student' ,
-        ] );
-
-        \App\UserType::create( [
-            'name' => 'lecturer' ,
+            'name' => 'user' ,
         ] );
     }
 }
@@ -138,13 +134,14 @@ class UserTableSeeder extends Seeder {
       'password' => "dbs" ,
       'fname' => 'DBS' ,
       'lname' => 'Subject' ,
+      'id_number' => '8501016184086' ,
       'fullname' => '' ,
       'address' => $faker->address ,
       'user_type' => 'admin' ,
       'user_number' => 'ADM00001' ,
     ]);
 
-    $user->makeEmployee('admin');
+    $user->addPermissions('admin');
 
 
     $user = \App\User::create( [
@@ -152,37 +149,42 @@ class UserTableSeeder extends Seeder {
         'password' => "dbs" ,
         'fname' => 'Jo' ,
         'lname' => 'DB' ,
+        'id_number' => '8501016184086' ,
         'fullname' => '' ,
         'address' =>$faker->address ,
         'user_type' => 'super_admin' ,
         'user_number' => 'SPR00001' ,
     ]);
 
-    $user->makeEmployee('super_admin');
+    $user->addPermissions('super_admin');
 
     $user = \App\User::create( [
         'email' => 'joaonzango@gmail.com' ,
         'password' => "dbs" ,
         'fname' => 'Joao' ,
         'lname' => 'Nzango' ,
+        'id_number' => '8501016184086' ,
         'fullname' => '' ,
         'address' => $faker->address,
-        'user_type' => 'student' ,
+        'user_type' => 'user' ,
         'user_number' => 'ST00001' ,
     ]);
+
+    $user->addPermissions('user');
 
     $user = \App\User::create( [
         'email' => 'joaonzangoii@hotmail.com' ,
         'password' => "dbs" ,
         'fname' => 'Julio' ,
         'lname' => 'Nzango' ,
+        'id_number' => '8501016184086' ,
         'fullname' => '' ,
         'address' => $faker->address,
-        'user_type' => 'lecturer' ,
+        'user_type' => 'user' ,
         'user_number' => 'LEC00001' ,
     ]);
 
-    $user->makeEmployee('lecturer');
+    $user->addPermissions('user');
   }
 }
 
@@ -194,8 +196,8 @@ class UserTableSeeder extends Seeder {
       $user = \App\User::find(1);
       $categories = \App\BookCategory::all();
       $faker = Faker\Factory::create();
-      $covers = ["1.jpg","2.jpg","3.jpg"];
-      for ($i=0; $i < 3; $i++) { 
+      $covers = ["1.jpeg","2.jpg","3.jpg","1.jpeg","2.jpg"];
+      for ($i=0; $i < 5; $i++) { 
         $number = $faker->randomNumber(2);
         $cover = \App\Cover::create([
           "image" => $covers[$i],
@@ -217,5 +219,53 @@ class UserTableSeeder extends Seeder {
 
         $book->cover()->save($cover);      
       }
+
+      for ($i=0; $i < 5; $i++) { 
+        $number = $faker->randomNumber(2);
+        $cover = \App\Cover::create([
+          "image" => $covers[$i],
+          "alt" => "",
+        ]);
+        $book = \App\Book::create([
+          "title" => $faker->text($maxNbChars = 50),
+          "author" => $faker->name,
+          "edition" => "2nd",
+          "isbn" => $faker->ean13,
+          "total_num_books" => $number,
+          "avail_books" => $number,
+          "year"=> $faker->year($max = 'now') ,
+          "price" => $faker->randomNumber(2),
+          "user_id" =>  $user->id,
+          "book_category_id" => $categories[$i]->id,
+          "published_at" =>new DateTime(),
+        ]); 
+
+        $book->cover()->save($cover);      
+      }
+
+      for ($i=0; $i < 5; $i++) { 
+        $number = $faker->randomNumber(2);
+        $cover = \App\Cover::create([
+          "image" => $covers[$i],
+          "alt" => "",
+        ]);
+        $book = \App\Book::create([
+          "title" => $faker->text($maxNbChars = 50),
+          "author" => $faker->name,
+          "edition" => "3rd",
+          "isbn" => $faker->ean13,
+          "total_num_books" => $number,
+          "avail_books" => $number,
+          "year"=> $faker->year($max = 'now') ,
+          "price" => $faker->randomNumber(2),
+          "user_id" =>  $user->id,
+          "book_category_id" => $categories[$i]->id,
+          "published_at" =>new DateTime(),
+        ]); 
+
+        $book->cover()->save($cover);      
+      }
+
+
     }
   }

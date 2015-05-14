@@ -11,6 +11,7 @@
        @endif
       </div>
       <div class="row">
+{{--        {!! $edit !!} --}}
         <div class="col-md-6 col-md-offset-3">
          {!! Form::model($book, array('method'=>"PATCH",'route' => ['admin.books.update',$book->slug], 'class' => 'form', 'files'=>true)) !!}
           <div class="form-group">
@@ -49,22 +50,6 @@
               {!! Form::label('published_at', 'Publicado em') !!}
               {!! Form::input('date','published_at', $book->published_at->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
-          {{--        
-           <div class="control-group">
-             <div class="form-group">
-                {!! Form::label('alt', 'Image Alt') !!}
-                {!! Form::text('book->cover->alt',Input::old('book->cover->alt'),['class'=>'form-control', 'placeholder' => 'Image alt...']) !!}
-            </div>
-            <div class="controls">
-            {!! Form::file('image') !!}
-            <p class="help-block">Hey! Please don't upload over 15MB images!</p>
-            <p class="errors">{{$errors->first('image')}}</p>
-            @if(Session::has('error'))
-            <p class="errors">{{ Session::get('error') }}</p>
-            @endif
-            </div> 
-          </div>
-          --}}
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
           <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a>
@@ -72,8 +57,6 @@
         </div>
       </div>
   </div>
-  {{-- SELECT `id`, `titulo`, `link`, `cantor`, `foto`, `descricao`, `categoria_id`, `created_at`, `updated_at` FROM `musicas` WHERE 1 --}}
-  <!-- /#page-content-wrapper -->
   @endsection
   @section("scripts")
     @include("admin.partials._select2")

@@ -27,10 +27,19 @@ class RouteServiceProvider extends ServiceProvider {
 		
 		parent::boot($router);
 
-		$router->bind("books",function($slug){
+		// $router->bind("books",function($slug){
+		// 	try {
+		// 		// dd($slug);
+		// 	  return \App\Book::whereSlug($slug)->firstOrFail();  //findOrfail($slug);
+		// 	} catch ( ModelNotFoundException $e ) {
+		// 	  return abort("404");
+		// 	}
+		// });
+
+		$router->bind("books",function($id){
 			try {
 				// dd($slug);
-			  return \App\Book::whereSlug($slug)->firstOrFail();  //findOrfail($slug);
+			  return \App\Book::findOrfail($id);
 			} catch ( ModelNotFoundException $e ) {
 			  return abort("404");
 			}

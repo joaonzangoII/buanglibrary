@@ -167,6 +167,8 @@ return [
 		'Laracasts\Utilities\JavaScript\JavascriptServiceProvider',
 		'Dinesh\Barcode\BarcodeServiceProvider',
 		'Bkwld\Croppa\ServiceProvider',
+		'Zofe\Rapyd\RapydServiceProvider',
+		// 'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
 
 	],
 
@@ -236,6 +238,7 @@ return [
 		'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
     'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
     'Croppa' => 'Bkwld\Croppa\Facade',
+    // 'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
 
 	],
 

@@ -1,11 +1,12 @@
 @foreach($books as $key => $value)
   <tr>
-    @if ($value->cover)
-      <td>
-        <img class="img-responsive img-thumbnail" src="{{ Croppa::url('/images/uploads/' . $value->cover->image, 300, 200)}}" width="100" height="100" alt=""></td>
+     {{--  @if ($value->cover)
+        <td>
+          <img class="img-responsive img-thumbnail" src="{{ Croppa::url('/images/uploads/' . $value->cover->image, 300, 200)}}" width="100" height="100" alt="">
+        </td>
       @else
         <td><img src="" alt=""></td>
-      @endif
+      @endif --}}
       <td>{{$value->title}}</td>
       <td>{{$value->author}}</td>
       <td>{{$value->edition}}</td>

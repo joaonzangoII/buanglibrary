@@ -24,7 +24,9 @@ Route::get('admin', 'AdminController@index');
 Route::get('admin/books/booking-any', array("uses" => 'AdminBookingsController@create_any_booking', "as" =>"admin.bookings.any"));
 Route::get('admin/books/booking/{books}', array("uses" => 'AdminBookingsController@create_booking', "as" =>"admin.bookings.one"));
 Route::post('admin/books/booking', array("uses" => 'AdminBookingsController@store_booking', "as" =>"admin.bookings.user.store"));
+Route::get('admin/books/action', 'AdminBooksController@getAction');
 Route::resource('admin/books', 'AdminBooksController');
+// /dataedit/uri?show={record_id}    filled output to READ record (without form)
 Route::resource('admin/categories', 'AdminCategoriesController');
 Route::resource('admin/users', 'AdminUsersController');
 Route::resource('admin/bookings', 'AdminBookingsController');

@@ -6,19 +6,46 @@
         <div class="col-lg-12">
           {{-- {{ Auth::user() }} --}}
           <section class="col-md-99">
-          <h1>Profile: {{ Auth::user()->fullname }}</h1>
-          <p>email:    {{ Auth::user()->email }}</p>
+          {{-- <p>All Books:   {{ count($books) }}</p> --}}
+          <div class="col-sm-9 col-md-10 main">
+              <div class="row placeholders">
+                @foreach ($book_categories_list as $element)
+                  <div class="col-xs-6 col-sm-3 placeholder text-center">
+                    <img src="//placehold.it/200/6666ff/fff" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                    <hr>
+                  </div>
 
-
-          <p>All Books:   {{ count($books) }}</p>
-          <ul>
+                @endforeach
+             {{--    <div class="col-xs-6 col-sm-3 placeholder text-center">
+                  <img src="//placehold.it/200/66ff66/fff" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                  <h4>Label</h4>
+                  <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                  <img src="//placehold.it/200/6666ff/fff" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                  <h4>Label</h4>
+                  <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                  <img src="//placehold.it/200/66ff66/fff" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                  <h4>Label</h4>
+                  <span class="text-muted">Something else</span>
+                </div> --}}
+              </div>
+              
+              <hr>
+             
+          </div>
+          {{-- <ul>
             @foreach ($books as $book)
               <li>{{$book->title}}</li>
             @endforeach
-          </ul>
+          </ul> --}}
 
           {{-- <div class="col-md-4"> --}}
-            <canvas id="myBarChart" width="300" height="400"></canvas> 
+            {{-- <canvas id="myBarChart" width="300" height="400"></canvas>  --}}
           {{-- </div> --}}
           </section>
         </div>

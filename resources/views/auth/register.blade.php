@@ -34,10 +34,12 @@
                 {!! Form::label('email', 'Email:', array('class' => 'control-label')) !!}
                 {!! Form::text('email', Input::old('email'), array('class' => 'form-control', 'placeholder' => 'email')) !!}
               </div>
-              <div class="form-group">
+           {{--    <div class="form-group">
                 {!! Form::label('user_type', 'Type', array('class' => 'control-label')) !!}
                 {!! Form::select('user_type', ["lecturer" => "lecturer","student" => "student"],null, array('class' => 'form-control', 'placeholder' => 'types')) !!}
-              </div>
+              </div> --}}
+              {!!Form::hidden("user_type","user")!!}
+
               <div class="form-group">
                 {!! Form::label('phone', 'Phonenumber:', array('class' => 'control-label')) !!}
                 {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}

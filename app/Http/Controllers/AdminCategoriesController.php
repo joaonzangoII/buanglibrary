@@ -65,12 +65,12 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($book_category)
 	{
 		// if(!Auth::User()->isAdmin()){
 		// 	return redirect()->route("admin.forbidden");
 		// }
-	  return view ("admin.pages.categories.show");
+	  return view ("admin.pages.categories.show",compact("book_category"));
 	}
 
 	/**
@@ -79,7 +79,7 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($book_category)
 	{
 		if(!Auth::User()->isAdmin()){
 			return redirect()->route("admin.forbidden");
@@ -92,7 +92,7 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($book_category)
 	{
 		//
 	}

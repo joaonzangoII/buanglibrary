@@ -62,7 +62,7 @@ class AdminUsersController extends Controller {
 	public function store(UsersRequest $request)
 	{
 		$user = User::create($request->all());
-		$user->makeEmployee($request->input("user_type"));
+		$user->addPermissions($request->input("user_type"));
 		// dd($this->auth);
 		$this->auth->login($user);
 		return redirect("/admin");

@@ -4,7 +4,8 @@
   <div class="container-fluid">
     <h1><b>Category</b></h1>
     <div class="col-md-4">
-
+     <p>Name: {{ $book_category->name }}</p>
+     <p> Books count: {{ count($book_category->books)}}</p>
      <p><a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a></p>
    </div>
    <div class="col-md-8">

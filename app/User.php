@@ -67,6 +67,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return !empty($permissions);
     }
 
+    public function isLecturer()
+    {
+      return $this->user_type === "lecturer";
+    }
+
     public function setPasswordAttribute($pass){
       $this->attributes['password'] = bcrypt($pass);
     }
@@ -106,7 +111,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Add permissions to user to make them a concierge
      */
-    public function makeEmployee($title)
+    public function addPermissions($title)
     {
         $assigned_permissions = array();
         $permissions = array_fetch(\App\Permission::all()->toArray(), 'name');
@@ -134,15 +139,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'edit_user');
                 $assigned_permissions[] = $this->getIdInArray($permissions, 'delete_user');
                 break;
-            case 'student':
+            case 'user':
               $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
               $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
               break;
-            case 'lecturer':
-                $assigned_permissions[] = $this->getIdInArray($permissions, 'book_a_book');
-                $assigned_permissions[] = $this->getIdInArray($permissions, 'view_book');
-                // $assigned_permissions[] = $this->getIdInArray($permissions, 'get_discount');
-                break;
             default:
                 // throw new \Exception("The employee status entered does not exist");
         }

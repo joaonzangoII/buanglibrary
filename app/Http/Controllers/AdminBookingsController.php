@@ -95,10 +95,15 @@ class AdminBookingsController extends Controller {
 		if($data["num_booked"] > $book->avail_books ){
 	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
 	  }
-
-
 	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
-	  $data["amount"] = $amount;
+	  $discount = 0;
+	  if($user->isLecturer()){
+     $discount = $amount * 0.1;
+     $data["has_discount"]	= "Y";
+	  }else{
+	  	$data["has_discount"]	= "N";
+	  }
+	  $data["amount"] = $amount - $discount;
 	  // dd($data);
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);
@@ -191,11 +196,16 @@ class AdminBookingsController extends Controller {
 		{
 			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
 		}
-	
-
 	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
-	  $data["amount"] = $amount;
-
+    $discount = 0;
+	  if($user->isLecturer()){
+     $discount = $amount * 0.1;
+     $data["has_discount"]	= "Y";
+	  }
+	  else{
+	  	$data["has_discount"]	= "N";
+	  }
+	  $data["amount"] = $amount - $discount;
 		$booking = Booking::create($data);
     $user->bookings()->attach($booking);
 		$booking->book()->attach($book);

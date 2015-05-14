@@ -19,6 +19,7 @@ class CreateBookingsTable extends Migration {
 			$table->integer('book_id');
 			$table->integer('num_booked');
 			$table->decimal('amount');
+			$table->string('has_discount');
 			$table->timestamp('start_date');
 			$table->timestamp('end_date');
 			$table->timestamps();

@@ -25,7 +25,7 @@
                   {{ $permission->name }}
                  @endforeach
                </td>
-               <td>{{$value->value_type}}</td>
+               <td>{{$value->user_type}}</td>
                <td>@include("admin.partials._actions_users")</td>
                <!-- <td>{{$value->title}}</td> -->
                {{-- <td>
