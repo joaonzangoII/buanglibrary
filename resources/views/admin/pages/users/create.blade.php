@@ -38,10 +38,11 @@
               {!! Form::label('email', 'Email:') !!}
               {!! Form::text('email', Input::old('email'), array('class' => 'form-control', 'placeholder' => 'email')) !!}
             </div>
-            <div class="form-group">
+            {!!Form::hidden("user_type","user")!!}
+            {{-- <div class="form-group">
               {!! Form::label('user_type', 'Type') !!}
               {!! Form::select('user_type', $emp_keys,null, array('class' => 'form-control', 'placeholder' => 'types')) !!}
-            </div>
+            </div> --}}
             <div class="form-group">
               {!! Form::label('phone', 'Phonenumber:') !!}
               {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
