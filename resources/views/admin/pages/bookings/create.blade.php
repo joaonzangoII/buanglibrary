@@ -1,6 +1,7 @@
 <!-- Page Content -->
 @extends("admin.layouts.master")
   @section("content")
+  {{ $_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'] }}
   <div class="container-fluid">
       <div class="col-md-12">
        @if($errors->any())
