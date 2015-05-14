@@ -201,7 +201,6 @@ class UserTableSeeder extends Seeder {
         $number = $faker->randomNumber(2);
         $cover = \App\Cover::create([
           "image" => $covers[$i],
-          "alt" => "",
         ]);
         $book = \App\Book::create([
           "title" => $faker->text($maxNbChars = 50),
@@ -260,7 +259,7 @@ class UserTableSeeder extends Seeder {
           "price" => $faker->randomNumber(2),
           "user_id" =>  $user->id,
           "book_category_id" => $categories[$i]->id,
-          "published_at" =>new DateTime(),
+          "published_at" => new DateTime(),
         ]); 
 
         $book->cover()->save($cover);      

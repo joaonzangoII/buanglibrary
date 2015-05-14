@@ -27,7 +27,6 @@ class BooksRequest extends Request {
 		{
 			$rules =  [
 			  "title" =>"required",
-				"alt" => "required",
 				//"image" => "required|mimes:jpeg,bmp,png",
 				"image" => "required|image",
 				"title"     =>"required",

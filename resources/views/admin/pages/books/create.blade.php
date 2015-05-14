@@ -50,10 +50,10 @@
               {!! Form::input('date','published_at', Date("Y-m-d"),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
            <div class="control-group">
-             <div class="form-group">
+       {{--       <div class="form-group">
                 {!! Form::label('alt', 'Image Alt') !!}
                 {!! Form::text('alt',Input::old('alt'),['class'=>'form-control', 'placeholder' => 'Image alt...']) !!}
-            </div>
+            </div> --}}
             <div class="controls">
               {!! Form::file('image') !!}
               <p class="help-block">Hey! Please don't upload over 15MB images!</p>
