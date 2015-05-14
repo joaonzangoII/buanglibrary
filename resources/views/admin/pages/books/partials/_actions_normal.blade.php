@@ -1,2 +1,3 @@
-  <a class="btn btn-s btn-dangerr" href="{{ route("admin.books.show",$value->slug) }}"><i class="fa fa-eye text-info" data-toggle="tooltip" data-placement="top" title="visualizar"></i></a>
-  <a class="btn btn-s btn-dangerr" href="{{ route("admin.bookings.one",$value->slug) }}"><i class="fa fa-book text-info" data-toggle="tooltip" data-placement="top" title="Book"></i></a>
+  <a class="btn btn-s btn-dangerr" href="{{ route("admin.books.show",$value->slug) }}"><span class="glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="show"></span></a>
+  <a class="btn btn-s btn-dangerr" href="{{ route("admin.bookings.one",$value->slug) }}"><span class="glyphicon glyphicon-book
+glyphicon " data-toggle="tooltip" data-placement="top" title="book"></span></a>

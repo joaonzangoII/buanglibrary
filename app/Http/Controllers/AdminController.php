@@ -23,7 +23,7 @@ class AdminController extends Controller {
   {
     // $books = \DB::select("select *from books");
     // $book_categories = \DB::select("select *from book_categories");  
-    $books = Book::all();
+    $books = Book::latest()->take(10)->get();
     // $book_categories = BookCategory::all();
     $book_categories_list  = BookCategory::lists("name");
     $book_categories  = BookCategory::with("books")->get();

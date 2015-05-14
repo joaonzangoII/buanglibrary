@@ -65,12 +65,79 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($book_category)
+	public function show(Request $request,BookCategory $book_category)
 	{
-		// if(!Auth::User()->isAdmin()){
-		// 	return redirect()->route("admin.forbidden");
-		// }
-	  return view ("admin.pages.categories.show",compact("book_category"));
+		// $books = $book_category->books()->paginate(10);
+		// $request
+		if($request->has("search"))
+		{
+			// dd($request->input("title"));
+			// $books=$book_category->books()->with("user","cover","book_category")->freesearch($request->input("title"),$request->input("author"),$request->input("edition"))->paginate(10);
+
+			$books=$book_category->books()->with("user","cover","book_category")
+			                     // ->where('book_category_id',$book_category->id)
+			                     ->where('title','like','%'.$request->input("title").'%')
+			                     ->orWhere('author','like','%'.$request->input("author").'%')
+			                     ->orWhere('edition','like','%'.$request->input("edition").'%')
+			                     ->paginate(10);
+			// dd($books);
+		}
+		else{			
+		 $books=$book_category->books()->with("user","cover","book_category")->paginate(10);
+		}
+
+		if($request->has("ord"))
+		{
+			// dd($request->input("ord"));
+			if($request->input("ord")==="title"){
+				$books = $book_category->books()->with("user","cover","book_category")->oldest("title")->paginate(10);
+			}
+			elseif($request->input("ord")==="-title")
+			{
+				$books = $book_category->books()->with("user","cover","book_category")->latest("title")->paginate(10);
+			}
+
+			if($request->input("ord")==="isbn"){
+				$books = $book_category->books()->with("user","cover","book_category")->oldest("isbn")->paginate(10);
+			}
+			elseif($request->input("ord")==="-isbn")
+			{
+				$books = $book_category->books()->with("user","cover","book_category")->latest("isbn")->paginate(10);
+			}
+
+      if($request->input("ord")==="author"){
+      	$books = $book_category->books()->with("user","cover","book_category")->oldest("author")->paginate(10);
+      }
+      elseif($request->input("ord")==="-author")
+      {
+      	$books = $book_category->books()->with("user","cover","book_category")->latest("author")->paginate(10);
+      }
+
+			if($request->input("ord")==="price"){
+				$books = $book_category->books()->with("user","cover","book_category")->oldest("price")->paginate(10);
+			}
+			elseif($request->input("ord")==="-price")
+			{
+				$books = $book_category->books()->with("user","cover","book_category")->latest("price")->paginate(10);
+			}
+
+			if($request->input("ord")==="avail_books"){
+				$books = $book_category->books()->with("user","cover","book_category")->oldest("avail_books")->paginate(10);
+			}
+			elseif($request->input("ord")==="-avail_books")
+			{
+				$books = $book_category->books()->with("user","cover","book_category")->latest("avail_books")->paginate(10);
+			}
+
+			if($request->input("ord")==="total_num_books"){
+				$books = $book_category->books()->with("user","cover","book_category")->oldest("total_num_books")->paginate(10);
+			}
+			elseif($request->input("ord")==="-total_num_books")
+			{
+				$books = $book_category->books()->with("user","cover","book_category")->latest("total_num_books")->paginate(10);
+			}
+		}
+		return view("admin.pages.categories.show",compact('book_category',"books"));
 	}
 
 	/**
@@ -84,6 +151,7 @@ class AdminCategoriesController extends Controller {
 		if(!Auth::User()->isAdmin()){
 			return redirect()->route("admin.forbidden");
 		}
+    return view("admin.pages.categories.edit",compact('book_category',"books"));
 	}
 
 	/**
@@ -92,9 +160,11 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($book_category)
+	public function update(BookCategoriesRequest $request, BookCategory $book_category)
 	{
-		//
+		$data=$request->all();
+		$book_category->update($data);
+		return redirect()->route("admin.categories.index")->with('flash_notice', 'A book category has been updated');
 	}
 
 	/**

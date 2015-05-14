@@ -21,13 +21,13 @@
             {!! Form::text('edition', Input::old('edition'), array('class' => 'form-control', 'placeholder' => 'Edition')) !!}
             </div>
             <input class="btn btn-primary" type="submit" value="search">
-            <a href="/admin/books" class="btn btn-default">reset</a>
+            <a href="/admin/books" class="btn btn-default">Cancel</a>
             <input name="search" type="hidden" value="1">
           {!! Form::close() !!}
           <br>
          @if (Auth::user()->isAdmin())
           <div class="pull-right">
-            <a href="/admin/books/create" class="btn btn-default">New book</a>
+            <a href="/admin/books/create" class="btn btn-default"><span class="glyphicon glyphicon-plus"> </span> New book</a>
           </div>
           <br/>
           <br/>

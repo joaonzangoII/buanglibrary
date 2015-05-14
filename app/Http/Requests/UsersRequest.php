@@ -21,14 +21,32 @@ class UsersRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			'fname'  =>"required",
-			'lname'  =>"required",
-			'address'  =>"required",
-			'email'  =>"required|email|unique:users,email",
-			'password'  =>"required|min:6",
-			'phone'  =>"required|numeric|digits:10|digits:10",
-		];
-	}
+		$method = Request::method();
+		$rules = [];
+		if($method=="POST")
+		{
+			$rules = [
+				'fname'  =>"required",
+				'lname'  =>"required",
+				'id_number'  =>"required|numeric|digits:13",
+				'address'  =>"required",
+				'email'  =>"required|email|unique:users,id",
+				'password'  =>"required|min:6|confirmed",
+				'password_confirmation'  =>"required|min:6",
+				'phone'  =>"required|numeric|digits:10|digits:10",
+			];
+	  }
+	  else{
+      $rules = [
+				'fname'  =>"required",
+				'lname'  =>"required",
+				'id_number'  =>"required|numeric|digits:13",
+				'address'  =>"required",
+				'email'  =>"required|email|unique:users,id",
+				'phone'  =>"required|numeric|digits:10|digits:10",
+			];
+	  }
 
+	 return $rules;
+	}
 }

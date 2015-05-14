@@ -13,6 +13,7 @@
       <div class="row">
 {{--        {!! $edit !!} --}}
         <div class="col-md-6 col-md-offset-3">
+        <h1><b><span class="glyphicon glyphicon-edit"></span> Edit Book</b></h1>
          {!! Form::model($book, array('method'=>"PATCH",'route' => ['admin.books.update',$book->slug], 'class' => 'form', 'files'=>true)) !!}
           <div class="form-group">
             {!! Form::label('title', 'Title') !!}
@@ -48,11 +49,11 @@
           </div>
           <div class="form-group">
               {!! Form::label('published_at', 'Publicado em') !!}
-              {!! Form::input('datetime','published_at', $book->published_at->format('Y-m-d H:i:s'),['class'=>'form-control', 'placeholder' => 'published']) !!}
+              {!! Form::input('date','published_at', $book->published_at->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
-          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a>
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Back</a>
          {!! Form::close() !!}
         </div>
       </div>

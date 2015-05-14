@@ -12,6 +12,7 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
+        <h1><b><span class="glyphicon glyphicon-edit"></span> Edit booking</b></h1>
          {!! Form::model($booking,array('method'=>"PATCH",'route' => ['admin.bookings.update',$booking->id], 'class' => 'form')) !!}
           <div class="form-group">
             {!! Form::label('booker_id', 'User') !!}
@@ -28,18 +29,18 @@
 
           <div class="form-group">
               {!! Form::label('start_date', 'From') !!}
-              {!! Form::input('datetime','start_date', $booking->start_date->format('Y-m-d H:i:s'),['class'=>'form-control', 'placeholder' => 'Start date']) !!}
+              {!! Form::input('date','start_date', $booking->start_date->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'Start date']) !!}
           </div>
 
           <div class="form-group">
               {!! Form::label('end_date', 'To') !!}
-              {!! Form::input('datetime','end_date', $booking->end_date->format('Y-m-d H:i:s'),['class'=>'form-control', 'placeholder' => 'End date']) !!}
+              {!! Form::input('date','end_date', $booking->end_date->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'End date']) !!}
           </div>
 
 
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
-          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Back</a>
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Back</a>
         {!! Form::close() !!}
         </div>
       </div>

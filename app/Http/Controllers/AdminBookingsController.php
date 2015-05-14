@@ -69,6 +69,11 @@ class AdminBookingsController extends Controller {
 	public function store(BookingsRequest $request)
 	{
 	  $data = $request->all();
+		$start_date = new Carbon($data["start_date"]);
+	  $end_date = new Carbon($data["end_date"]);
+		if($start_date < Date("Y-m-d")){
+	  	return redirect()->back()->withInput()->withErrors('start date cannot be prior to todays date');
+	  }
 	  if(Book::all()->count()==0){
 	  	return redirect()->back()->withInput()->withErrors('There are no books available');
 	  }
@@ -78,8 +83,7 @@ class AdminBookingsController extends Controller {
 	  }
 		$user = User::find($data["booker_id"]);
 	  $data["booker_id"] = $user->id;
-	  $start_date = new Carbon($data["start_date"]);
-	  $end_date = new Carbon($data["end_date"]);
+
 	  // dd($data);
 	  if($end_date < $start_date){
 	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
@@ -114,7 +118,7 @@ class AdminBookingsController extends Controller {
     $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
     \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
     {
-      $message->to($send_data["user"]->email, 'Buang Library')->subject('Contacts');
+      $message->to($send_data["user"]->email, 'Buang Library')->subject('Booking');
     });
 		Session::flash('flash_notice', 'Successfully booked this book!');
     return redirect()->route("admin.bookings.index");
@@ -168,9 +172,14 @@ class AdminBookingsController extends Controller {
 	}
 
 	public function store_booking(BookingsRequest $request)
-	{   
-	  $user = Auth::User();
+	{  
 	  $data = $request->all();
+		$start_date = new Carbon($data["start_date"]);
+	  $end_date = new Carbon($data["end_date"]);
+		if($start_date < Date("Y-m-d")){
+	  	return redirect()->back()->withInput()->withErrors('start date cannot be prior to todays date');
+	  }
+	  $user = Auth::User();
 	  if(Book::all()->count()==0){
 	  	return redirect()->back()->withInput()->withErrors('There are no books available');
 	  }
@@ -181,8 +190,6 @@ class AdminBookingsController extends Controller {
 	  // 	return redirect()->back()->withInput()->withErrors('cannot book now');
 	  // }
 	  $data["booker_id"] = $user->id;
-	  $start_date = new Carbon($data["start_date"]);
-	  $end_date = new Carbon($data["end_date"]);
 	  $num_days = $start_date->diff($end_date)->days;
     
     if($data["num_booked"]<=0){
@@ -221,7 +228,7 @@ class AdminBookingsController extends Controller {
     $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
     \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
     {
-      $message->to($send_data["user"]->email, 'Buang Library')->subject('Contacts');
+      $message->to($send_data["user"]->email, 'Buang Library')->subject('Booking');
     });
 
 		Session::flash('flash_notice', 'Successfully booked this book!');

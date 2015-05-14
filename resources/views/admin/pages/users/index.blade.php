@@ -26,7 +26,7 @@
                  @endforeach
                </td>
                <td>{{$value->user_type}}</td>
-               <td>@include("admin.partials._actions_users")</td>
+               <td>@include("admin.pages.users.partials._actions_users")</td>
                <!-- <td>{{$value->title}}</td> -->
                {{-- <td>
                <img width="50px" src="/{{ $image->image->src }}" alt="" />

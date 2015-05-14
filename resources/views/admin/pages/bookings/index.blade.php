@@ -11,6 +11,7 @@
           {{-- <table class="table table-condensed table-striped"> --}}
           <table class="table table-striped">
             <tr>
+              <th>Booking Number</th>
               <th>Title</th>
               {{-- <th>Cover</th> --}}
               <th># Booked</th>
@@ -31,6 +32,7 @@
                    <td><img src="" alt=""></td>
                  @endif
                   --}}
+                 <td>{{$value->booking_number}}</td>
                  <td>{{$value->book[0]->title}}</td>
                  <td>{{$value->num_booked}}</td>
                  <td>{{$value->amount}}</td>

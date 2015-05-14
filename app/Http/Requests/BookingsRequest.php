@@ -25,8 +25,8 @@ class BookingsRequest extends Request {
 			// "book_id" =>"required",
 			"num_booked" =>"required|numeric",
 			// "amount" =>"required|decimal",
-			"start_date" =>"required|date_format:Y-m-d H:i:s",
-			"end_date" =>"required|date_format:Y-m-d H:i:s",
+			"start_date" =>"required|date",
+			"end_date" =>"required|date",
 		];
 	}
 

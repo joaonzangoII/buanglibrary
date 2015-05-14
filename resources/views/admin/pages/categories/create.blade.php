@@ -11,7 +11,8 @@
        @endif
       </div>
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6 col-md-offset-3">
+        <h1><b><span class="glyphicon glyphicon-plus"></span> Book Category</b></h1>
          {!! Form::open(array('method'=>"POST",'action' => 'AdminCategoriesController@store', 'class' => 'form', 'files'=>true)) !!}
           <div class="form-group">
             {!! Form::label('name', 'Name') !!}
@@ -19,6 +20,7 @@
           </div>
           <div id="success"> </div>
           {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Back</a>
         {!! Form::close() !!}
         </div>
       </div>

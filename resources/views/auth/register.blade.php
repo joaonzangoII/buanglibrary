@@ -27,6 +27,10 @@
                 {!! Form::hidden('fullname', '', array('class' => 'control-label')) !!}
               </div>
               <div class="form-group">
+                <label for="id_number">ID Number</label>
+                <input type="text" name="id_number" class="form-control" id="id_number" placeholder="ID Number">
+              </div>
+              <div class="form-group">
                 {!! Form::label('address', 'Adress:', array('class' => 'control-label')) !!}
                 {!! Form::text('address', Input::old('address'), array('class' => 'form-control', 'placeholder' => 'address')) !!}
               </div>
@@ -44,13 +48,13 @@
                 {!! Form::label('phone', 'Phonenumber:', array('class' => 'control-label')) !!}
                 {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
               </div>
-              {{--  <div class="form-group">
-                {!! Form::label('password', 'Password:') !!} 
-                {!! Form::password('password', Input::old('password'), array('class'=> 'form-control')); !!}
-              </div> --}}
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputConfPassword">Confirm Password</label>
+                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm Password">
               </div>
               <div class="form-group">
                 <div id="success"> </div>

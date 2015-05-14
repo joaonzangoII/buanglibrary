@@ -21,6 +21,7 @@ class CreateBookingsTable extends Migration {
 			$table->decimal('amount');
 			$table->string('has_discount');
 			$table->string('state');
+			$table->string('booking_number');
 			$table->timestamp('start_date');
 			$table->timestamp('end_date');
 			$table->timestamps();

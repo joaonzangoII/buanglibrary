@@ -11,12 +11,7 @@
        @endif
       </div>
         <div class="col-md-6 col-md-offset-2">
-          <!-- ''  =>"required",
-          'lname'  =>"required",
-          'address'  =>"required",
-          'email'  =>"required",
-          'password'  =>"required",
-          'phone'  =>"required", -->
+          <h1><b><span class="glyphicon glyphicon-plus"></span> Create User </b></h1>
            {!! Form::open(array('method'=>"POST",'action' => 'AdminUsersController@store', 'class' => 'form', 'files'=>true)) !!}
           <div class="row">
             <div class="form-group">
@@ -29,6 +24,10 @@
             </div>
             <div class="form-group">
               {!! Form::hidden('fullname', '') !!}
+            </div>
+            <div class="form-group">
+              <label for="id_number">ID Number</label>
+              <input type="text" name="id_number" class="form-control" id="id_number" placeholder="ID Number">
             </div>
             <div class="form-group">
               {!! Form::label('address', 'Adress:') !!}
@@ -51,11 +50,15 @@
                <label for="exampleInputPassword1">Password</label>
                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
              </div>
+             <div class="form-group">
+               <label for="exampleInputConfPassword">Confirm Password</label>
+               <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm Password">
+             </div>
             </div>
             <div class="row">
               <div id="success"> </div>
               {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
-              <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a>
+              <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Back</a>
             </div>
           {{-- </div> --}}
         {!! Form::close() !!}

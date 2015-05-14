@@ -12,6 +12,8 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
+      <h1><b><span class="glyphicon glyphicon-edit"></span> Edit User</b></h1>
+      <hr>
        {!! Form::model($user, array('method'=>"PATCH", 'action' => ['AdminUsersController@update', $user->id], 'class' => 'form')) !!}
           <div class="row">
             <div class="form-group">
@@ -21,6 +23,10 @@
             <div class="form-group">
               {!! Form::label('lname', 'Lastname:') !!}
               {!! Form::text('lname', Input::old('lname'), array('class' => 'form-control', 'placeholder' => 'lastname')) !!}
+            </div>
+            <div class="form-group">
+              {!! Form::label('id_number', 'Id Number:') !!}
+              {!! Form::text('id_number', Input::old('id_number'), array('class' => 'form-control', 'placeholder' => 'ID Number')) !!}
             </div>
             <div class="form-group">
               {!! Form::hidden('fullname', '') !!}
@@ -41,15 +47,17 @@
               {!! Form::label('phone', 'Phonenumber:') !!}
               {!! Form::text('phone', Input::old('phone'), array('class' => 'form-control', 'placeholder' => 'Phonenumber')) !!}
             </div>
-             <div class="form-group">
+            {!! Form::hidden('password', Input::old('password')) !!}
+            {!! Form::hidden('password_confirmation', Input::old('password')) !!}
+         {{--     <div class="form-group">
                <label for="exampleInputPassword1">Password</label>
                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-             </div>
+             </div> --}}
             </div>
             <div class="row">
               <div id="success"> </div>
               {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
-              <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" ><i class="fa fa-undo"></i> Cancelar</a>
+              <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Back</a>
             </div>
           {{-- </div> --}}
         {!! Form::close() !!}
