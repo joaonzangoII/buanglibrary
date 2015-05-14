@@ -57,7 +57,7 @@ class AdminBookingsController extends Controller {
 		if(!Auth::User()->isAdmin()){
 			return redirect()->route("admin.forbidden");
 		}
-			$user_keys = User::whereIn("user_type",["lecturer","student"])->lists("fullname","id");
+			$user_keys = User::whereIn("user_type",["user"])->lists("fullname","id");
 		return view ("admin.pages.bookings.create",compact("book_keys","user_keys"));
 	}
 
@@ -104,12 +104,18 @@ class AdminBookingsController extends Controller {
 	  	$data["has_discount"]	= "N";
 	  }
 	  $data["amount"] = $amount - $discount;
-	  // dd($data);
+	  $data["state"] = "pending";
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);
 		$booking->book()->attach($book);
     $book->decrement("avail_books",$data["num_booked"]);
     $book->save();
+    
+    $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
+    \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
+    {
+      $message->to($send_data["user"]->email, 'Buang Library')->subject('Contacts');
+    });
 		Session::flash('flash_notice', 'Successfully booked this book!');
     return redirect()->route("admin.bookings.index");
 	}
@@ -206,11 +212,18 @@ class AdminBookingsController extends Controller {
 	  	$data["has_discount"]	= "N";
 	  }
 	  $data["amount"] = $amount - $discount;
+	  $data["state"] = "pending";
 		$booking = Booking::create($data);
-    $user->bookings()->attach($booking);
+		$user->bookings()->attach($booking);
 		$booking->book()->attach($book);
     $book->decrement("avail_books",$data["num_booked"]);
-    $book->save();
+    $book->save(); 
+    $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
+    \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
+    {
+      $message->to($send_data["user"]->email, 'Buang Library')->subject('Contacts');
+    });
+
 		Session::flash('flash_notice', 'Successfully booked this book!');
     return redirect()->route("admin.bookings.index");
 	}

@@ -1,9 +1,8 @@
 <!--This is a blade template that goes in email message to site administrator-->
 <?php
 //get the first name
-$name = Input::get('name');
-$email = Input::get ('email');
-$message = Input::get ('message');
+$name = $user->fullname;
+$email = $user->email;
 $date_time = date("F j, Y, g:i a");
 $userIpAddress = Request::getClientIp();
 ?>
@@ -20,15 +19,17 @@ $userIpAddress = Request::getClientIp();
 
 <body style="margin: 0; padding: 0;">
  <form>
-   <h1>Fomos contactados por {{$name}}</h1>
-   <p><b>Email:</b> {{$email}}</p>
-   <p><b>Data:</b> {{$date_time}}</p>
-   <p><b>IP Address:</b> {{$userIpAddress}}</p>
-   <br/>
-   <p>{{$message}}</p>
+   <h1><b>Your Booking was successful!</b></h1>
+   <h3>Booking details</h3>
+   @if ($book->cover)
+     <td><img class="img-responsive img-thumbnail" src="/images/uploads/'.{{ $book->cover->image}}" width="100" height="100" alt=""></td>
+   @else
+     <td><img src="" alt=""></td>
+   @endif
+   <p>Book Title: {{ $book->title }}</p>
+   <p>Number booked: {{ $booking->num_booked }}</p>
+   <p>Amount Due: {{ $booking->amount }}</p>
  </form>
-
-
  <!-- Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>

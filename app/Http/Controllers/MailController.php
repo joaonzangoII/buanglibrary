@@ -20,7 +20,7 @@ class MailController extends Controller {
     //Send email using Laravel send function
     \Mail::send('emails.contact', $data, function($message) use ($data)
     {
-      $message->to("joaonzango@gmail.com", 'DBSProject')->subject('Contacts');
+      $message->to("joaonzango@gmail.com", 'Buang Library')->subject('Contacts');
       // $message->to(env('MAIL_USERNAME'), 'DBSProject')->subject('Contacts');
 
     });
