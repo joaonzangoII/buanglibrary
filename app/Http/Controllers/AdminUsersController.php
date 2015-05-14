@@ -23,10 +23,10 @@ class AdminUsersController extends Controller {
 		if(!\Auth::guest())
 			if(\Auth::User()->hasPermission("create_admin")==true)
 	    {
-				$emp_keys = ["admin" =>"admin","lecturer" =>"lecturer","student"=>"student"];
+				$emp_keys = ["admin" =>"admin","user"=>"user"];
 		  }
 		  else{
-		  	$emp_keys = ["lecturer" =>"lecturer","student"=>"student"];
+		  	$emp_keys = ["user" =>"user"];
 		  }
 
 		view()->share(compact("emp_keys"));
