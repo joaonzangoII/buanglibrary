@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    {{-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> --}}
                 </div>
             </div>
             <div class="row text-center">
@@ -241,7 +241,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    {{-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> --}}
                 </div>
             </div>
             <div class="row">
@@ -322,7 +322,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    {{-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> --}}
                 </div>
             </div>
             <div class="row">
@@ -373,7 +373,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="img/team/nopic.jpg" class="img-responsive img-circle" alt="">
+                        <img src="img/team/godfrey.jpg" class="img-responsive img-circle" alt="">
                         <h4>Godfrey Nevhutalu</h4>
                         <p class="text-muted">Co Documentation Writter</p>
                         <ul class="list-inline social-buttons">
@@ -426,7 +426,7 @@
     </section>
 
     <!-- Clients Aside -->
-    <aside class="clients">
+    {{-- <aside class="clients">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-6">
@@ -451,7 +451,7 @@
                 </div>
             </div>
         </div>
-    </aside>
+    </aside> --}}
     
     <!-- Contact Section -->
     <section id="contact">
@@ -459,7 +459,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    {{-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> --}}
                 </div>
             </div>
             <div class="row">
@@ -502,7 +502,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2014</span>
+                    <span class="copyright">Copyright &copy; Buang Library 2015</span>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
