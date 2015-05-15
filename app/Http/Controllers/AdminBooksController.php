@@ -37,8 +37,8 @@ class AdminBooksController extends Controller {
 		if($request->has("search"))
 		{
 			// dd($request->input("title"));
-			$books=Book::with("user","cover","book_category")->freesearch($request->input("title"),$request->input("author"))->paginate(10);
-			// dd($books);
+			$books=Book::with("user","cover","book_category")->freesearch($request->input("title"),$request->input("author"),$request->input("edition"))->paginate(10);
+
 		}
 		else{			
 		 $books=Book::with("user","cover","book_category")->paginate(10);
