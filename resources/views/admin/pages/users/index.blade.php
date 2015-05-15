@@ -12,6 +12,7 @@
           <tr>
             <th>Name</th>
             <th>email</th>
+            <th>ID Number</th>
             <th>Permissions</th>
             <th>User Type</th>
             <th>Actions</th>
@@ -20,6 +21,7 @@
              <tr>
                <td>{{$value->fullname}}</td>
                <td>{{$value->email}}</td>
+               <td>{{$value->id_number}}</td>
                <td>
                  @foreach ($value->permissions as $permission)
                   {{ $permission->name }}

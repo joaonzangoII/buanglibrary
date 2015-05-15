@@ -70,10 +70,13 @@ class AdminUsersController extends Controller {
 
 		$user = User::create($request->all());
 		$user->addPermissions($request->input("user_type"));
-		// dd($this->auth);
+		if(!\Auth::guest())
+		{
+			return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
+		}
 		$this->auth->login($user);
 		return redirect("/admin");
-		// return redirect()->route('admin.users.index')->with('flash_notice', 'New user created');
+		
 	}
 
 	/**

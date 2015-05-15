@@ -27,4 +27,12 @@ class Booking extends Model {
    {
       return $this->belongsToMany('App\Book',"bookings_books");
    }
+
+   public function scopeFreesearch($query, $value)
+   {
+     return $query->where('booking_number','like','%'.$value.'%')
+       ->orWhere('amount','like','%'.$value.'%')
+       ->orWhere('state','like','%'.$value.'%');
+   }
+
 }

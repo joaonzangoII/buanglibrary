@@ -8,6 +8,8 @@
      <p><b>Fullname:</b> {{ $user->fullname }}</p>
      <p><b>Phone:</b> {{ $user->phone }}</p>
      <p><b>Email:</b> {{ $user->email }}</p>
+     <p><b>ID_Number:</b> {{ $user->id_number }}</p>
+     <p><b>Address:</b> {{ $user->address }}</p>
      <p><b>User Type:</b> {{ $user->user_type }}</p>
      <p><b>Permissions:</b></p>
      <ul>

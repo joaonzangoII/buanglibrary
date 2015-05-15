@@ -23,20 +23,89 @@ class AdminBookingsController extends Controller {
 		$book_keys = Book::lists("title","id");
     view()->share(compact("book_keys"));
 	}
-	public function index()
+	public function index(Request $request)
 	{
-		if(Auth::guest()){
+		if(\Auth::guest()){
 			return redirect("/auth/login");
 		}
-		if(Auth::User()->isAdmin())
+		if(\Auth::User()->isAdmin())
 		{
-			$bookings = Booking::paginate(10);
+			// $request
+			if($request->has("search"))
+			{
+				// dd($request->input("title"));
+				$bookings=Booking::freesearch($request->input("booking_number"),$request->input("amount"),$request->input("state"))->paginate(10);
+			}
+			else{			
+			 $bookings=Booking::paginate(10);
+			}
 		}
 		else
 		{	
-		  // $bookings = Booking::paginate(10);		
-			$bookings = \Auth::User()->bookings()->paginate(10);
+		  // $request
+		  if($request->has("search"))
+		  {
+		  	// dd($request->input("title"));
+		  	$books=\Auth::User()->bookings()->freesearch($request->input("booking_number"),$request->input("amount"),$request->input("state"))->paginate(10);
+		  	// dd($books);
+		  }
+		  else{			
+		   $books=\Auth::User()->bookings()->paginate(10);
+		  }
 		}
+
+		// if($request->has("ord"))
+		// {
+		// 	// dd($request->input("ord"));
+		// 	if($request->input("ord")==="title"){
+		// 		$books = Book::with("user","cover","book_category")->oldest("title")->paginate(10);
+		// 	}
+		// 	elseif($request->input("ord")==="-title")
+		// 	{
+		// 		$books = Book::with("user","cover","book_category")->latest("title")->paginate(10);
+		// 	}
+
+		// 	if($request->input("ord")==="isbn"){
+		// 		$books = Book::with("user","cover","book_category")->oldest("isbn")->paginate(10);
+		// 	}
+		// 	elseif($request->input("ord")==="-isbn")
+		// 	{
+		// 		$books = Book::with("user","cover","book_category")->latest("isbn")->paginate(10);
+		// 	}
+
+  //     if($request->input("ord")==="author"){
+  //     	$books = Book::with("user","cover","book_category")->oldest("author")->paginate(10);
+  //     }
+  //     elseif($request->input("ord")==="-author")
+  //     {
+  //     	$books = Book::with("user","cover","book_category")->latest("author")->paginate(10);
+  //     }
+
+		// 	if($request->input("ord")==="price"){
+		// 		$books = Book::with("user","cover","book_category")->oldest("price")->paginate(10);
+		// 	}
+		// 	elseif($request->input("ord")==="-price")
+		// 	{
+		// 		$books = Book::with("user","cover","book_category")->latest("price")->paginate(10);
+		// 	}
+
+		// 	if($request->input("ord")==="avail_books"){
+		// 		$books = Book::with("user","cover","book_category")->oldest("avail_books")->paginate(10);
+		// 	}
+		// 	elseif($request->input("ord")==="-avail_books")
+		// 	{
+		// 		$books = Book::with("user","cover","book_category")->latest("avail_books")->paginate(10);
+		// 	}
+
+		// 	if($request->input("ord")==="total_num_books"){
+		// 		$books = Book::with("user","cover","book_category")->oldest("total_num_books")->paginate(10);
+		// 	}
+		// 	elseif($request->input("ord")==="-total_num_books")
+		// 	{
+		// 		$books = Book::with("user","cover","book_category")->latest("total_num_books")->paginate(10);
+		// 	}
+		// }
+
 		return view ("admin.pages.bookings.index",compact('bookings'));
 	}
 
@@ -79,7 +148,7 @@ class AdminBookingsController extends Controller {
 	  }
 	  $book = Book::find($data["book_id"]);
 	  if(!array_key_exists("booker_id" ,$data)){
-	  	return redirect()->back()->withInput()->withErrors('cannot book now');
+	  	return redirect()->back()->withInput()->withErrors("No user was selected");
 	  }
 		$user = User::find($data["booker_id"]);
 	  $data["booker_id"] = $user->id;
@@ -116,7 +185,7 @@ class AdminBookingsController extends Controller {
 	  // dd($duplicate->isEmpty());
 	  if($duplicate->isEmpty()==false)
 	  {
-     	return redirect()->back()->withInput()->withErrors('You cannot book this book again');
+     return redirect()->back()->withInput()->withErrors('cannot book now because you have booked this book - Please call (+27) 0701694624 and have your booking number ready');
 	  }
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);
@@ -317,7 +386,7 @@ class AdminBookingsController extends Controller {
 	  $duplicate= $this->find_duplicate($data["booker_id"],$data["book_id"],$data["start_date"],$data["end_date"]);
 	  if($duplicate->isEmpty()==false)
 	  {
-     	return redirect()->back()->withInput()->withErrors('You cannot book this book again');
+     return redirect()->back()->withInput()->withErrors('cannot book now because you have booked this book - Please call (+27) 0701694624 and have your booking number ready');
 	  }
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);

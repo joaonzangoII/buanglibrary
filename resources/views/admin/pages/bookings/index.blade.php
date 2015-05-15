@@ -6,7 +6,31 @@
     <div class="row">
       <div class="col-md-12">
         <h1>Available Bookings</h1>
-        <hr>
+       <hr>
+        {!! Form::open(array("url" =>"/admin/bookings/?search=1", "method" =>"GET","role" =>"form","class"=>"form-inline")) !!}
+        {{-- <form method="GET" action="http://localhost:8000/rapyd-demo/filter?search=1" accept-charset="UTF-8" class="form-inline" role="form"> --}}
+          <div class="form-group">
+          {!! Form::text('booking_number', Input::old('booking_number'), array('class' => 'form-control', 'placeholder' => 'Booking Number')) !!}
+          </div>
+          <div class="form-group">
+          {!! Form::text('amount', Input::old('amount'), array('class' => 'form-control', 'placeholder' => 'Amount')) !!}
+          </div>
+          <div class="form-group">
+          {!! Form::text('state', Input::old('state'), array('class' => 'form-control', 'placeholder' => 'Status')) !!}
+          </div>
+          <input class="btn btn-primary" type="submit" value="search">
+          <a href="/admin/bookings" class="btn btn-default">Cancel</a>
+          <input name="search" type="hidden" value="1">
+        {!! Form::close() !!}
+        <br>
+       @if (Auth::user()->isAdmin())
+        <div class="pull-right">
+          <a href="/admin/bookings/create" class="btn btn-default"><span class="glyphicon glyphicon-plus"> </span> New book</a>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        @endif
         <div class="table-responsive">
           {{-- <table class="table table-condensed table-striped"> --}}
           <table class="table table-striped">
