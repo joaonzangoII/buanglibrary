@@ -1,5 +1,5 @@
 <?php namespace App;
-
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -89,6 +89,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isAdmin()
     {
         return $this->user_type === "admin" || $this->user_type ==="super_admin";
+    }
+
+    public function date_of_birth()
+    {
+      $year = substr($this->id_number,0, 2);
+      $currentYear =  date("Y") % 100;
+      // dd($currentYear);
+      $prefix = "19";
+     
+      if (+$year < $currentYear)
+        $prefix = "20";
+      // dd( $prefix);
+      $month = substr($this->id_number,2, 2);
+      $day = substr($this->id_number,4, 2);
+      // dd($day);
+      return ($prefix . $year . "-" . $month . "-" . $day);
+    }
+
+    public function gender()
+    {
+      return +substr($this->id_number,6, 1) < 5 ? "female" : "male";
     }
  
     /**

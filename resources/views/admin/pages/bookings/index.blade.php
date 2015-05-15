@@ -38,7 +38,7 @@
               <th>Booking Number</th>
               <th>Title</th>
               {{-- <th>Cover</th> --}}
-              <th># Booked</th>
+              <th>Quantity</th>
               <th>Amount</th>
               <th>Discount?</th>
               <th>Start Date</th>
