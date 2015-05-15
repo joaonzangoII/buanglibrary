@@ -94,53 +94,8 @@ class AdminBooksController extends Controller {
 			{
 				$books = Book::with("user","cover","book_category")->latest("total_num_books")->paginate(10);
 			}
-
-			
-			// $books=Book::with("user","cover","book_category")->freesearch($request->input("title"),$request->input("author"))->paginate(10);
-			// dd($books);
 		}
-		// else{			
-		//  $books=Book::with("user","cover","book_category")->paginate(10);
-		// }
-		// $filter = \DataFilter::source(Book::with("user","cover","book_category"));
-		// $filter->add('title','Title', 'text');
-		// $filter->add('author','Author', 'text');
-		// $filter->add('edition','Edition', 'text');
-		// $filter->submit('search');
-		// $filter->reset('reset');
-		// $filter->build();
-
-		// $grid = \DataGrid::source($filter);  //same source types of DataSet
-		// $grid->add('title','Title', true); //field name, label, sortable
-		// $grid->add('author','Author'); 
-		// $grid->add('edition','Edition', true); //field name, label, sortable
-		// $grid->add('isbn','Isbn', true); //field name, label, sortable
-		// $grid->add('total_num_books','Total # books',true); //field name, label, sortable
-		// $grid->add('avail_books','Avail Books',true); //field name, label, sortable
-		// $grid->add('year','Year',true); //field name, label, sortable
-		// $grid->add('price','Price Per Book',true); //field name, label, sortable
-		// $grid->add('{{ $book_category->name }}','Category', 'book_category_id');
-		// $grid->add('{{ $user->fullname }}','Added by', 'user_id');
-		// if(Auth::User()->isAdmin()){
-		// 	$grid->link(route("admin.books.create"),"Add New", "TR");  //add button
-		// 	$grid->edit("/admin/books/action", 'Edit','show|modify|delete'); //shortcut to link DataEdit actions
-		// }
-		// else
-		// {			
-		// 	$grid->edit("/admin/books/action", 'Edit','show'); //shortcut to link DataEdit actions
-		// }
-		// $grid->orderBy('id','desc'); //default orderby
-		// $grid->paginate(10); //pagination
-
-		// $grid->row(function ($row) {
-		// 	if ($row->cell('avail_books')->value == 20) {
-		// 	$row->style("background-color:#CCFF66");
-		// 	} elseif ($row->cell('avail_books')->value < 5) {
-		// 	$row->cell('title')->style("font-weight:bold");
-		// 	$row->style("color:#f00");
-		// 	}
-		// });
-		// return view('admin.pages.books.index', compact('grid','filter'));
+		
 		return view('admin.pages.books.index', compact('books'));
 	}
 

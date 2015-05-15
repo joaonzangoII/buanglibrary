@@ -175,7 +175,9 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function destroy($book_category)
 	{
-		dd($book_category->books);
+		// dd($book_category->books);
+		$book_category->delete();
+		return redirect()->route("admin.categories.index")->with('flash_notice', 'A book category has been deleted');
 	}
 
 }

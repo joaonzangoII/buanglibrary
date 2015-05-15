@@ -84,6 +84,8 @@ class AdminBookingsController extends Controller {
 		$user = User::find($data["booker_id"]);
 	  $data["booker_id"] = $user->id;
 
+	  $data["booking_number"] = $this->booking_number();
+
 	  // dd($data);
 	  if($end_date < $start_date){
 	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
@@ -109,6 +111,13 @@ class AdminBookingsController extends Controller {
 	  }
 	  $data["amount"] = $amount - $discount;
 	  $data["state"] = "pending";
+
+	  $duplicate= $this->find_duplicate($data["booker_id"],$data["book_id"],$data["start_date"],$data["end_date"]);
+	  // dd($duplicate->isEmpty());
+	  if($duplicate->isEmpty()==false)
+	  {
+     	return redirect()->back()->withInput()->withErrors('You cannot book this book again');
+	  }
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);
 		$booking->book()->attach($book);
@@ -116,6 +125,7 @@ class AdminBookingsController extends Controller {
     $book->save();
     
     $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
+    // return view("admin.pages.bookings.partials._email",compact("send_data"));
     \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
     {
       $message->to($send_data["user"]->email, 'Buang Library')->subject('Booking');
@@ -124,6 +134,21 @@ class AdminBookingsController extends Controller {
     return redirect()->route("admin.bookings.index");
 	}
 
+	public function find_duplicate($booker_id,$book_id, $start_date,$end_date){
+	  $booking = Booking::where("booker_id",$booker_id)
+							        ->where("book_id",$book_id)
+							        ->where("start_date",$start_date)
+							        ->where("end_date",$end_date)->get();
+   return $booking;
+	}
+ public function booking_number(){
+ 	$code = 'BK';
+ 	$date = date('ymd');
+ 	$seq  = 1;
+ 	$b_number = sprintf('%s%s %04d', $code, $date, $seq);
+
+ 	return $b_number;
+ }
 	/**
 	 * Display the specified resource.
 	 *
@@ -180,6 +205,7 @@ class AdminBookingsController extends Controller {
 	  	return redirect()->back()->withInput()->withErrors('start date cannot be prior to todays date');
 	  }
 	  $user = Auth::User();
+	  $data["booking_number"] = $this->booking_number();
 	  if(Book::all()->count()==0){
 	  	return redirect()->back()->withInput()->withErrors('There are no books available');
 	  }
@@ -220,12 +246,19 @@ class AdminBookingsController extends Controller {
 	  }
 	  $data["amount"] = $amount - $discount;
 	  $data["state"] = "pending";
+
+	  $duplicate= $this->find_duplicate($data["booker_id"],$data["book_id"],$data["start_date"],$data["end_date"]);
+	  if($duplicate->isEmpty()==false)
+	  {
+     	return redirect()->back()->withInput()->withErrors('You cannot book this book again');
+	  }
 		$booking = Booking::create($data);
 		$user->bookings()->attach($booking);
 		$booking->book()->attach($book);
     $book->decrement("avail_books",$data["num_booked"]);
     $book->save(); 
     $send_data =["user" => $user,"book" => $book,"booking" => $booking ];
+
     \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
     {
       $message->to($send_data["user"]->email, 'Buang Library')->subject('Booking');
@@ -235,12 +268,14 @@ class AdminBookingsController extends Controller {
     return redirect()->route("admin.bookings.index");
 	}
 
-			/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+
+   
+		/**
+ * Remove the specified resource from storage.
+ *
+ * @param  int  $id
+ * @return Response
+ */
 	public function destroy(Booking $booking)
 	{
 		$book = $booking->book;

@@ -9,6 +9,7 @@ class Booking extends Model {
     "booker_id",
     "book_id",
     "amount",
+    "booking_number",
     "num_booked",
     "state",
     "has_discount",
