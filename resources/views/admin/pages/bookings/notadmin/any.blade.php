@@ -33,11 +33,13 @@
           </div>
 
           <div id="success"> </div>
-          {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!}
+          {{-- {!! Form::submit('Submit', array('class'=>'btn btn-info')) !!} --}}
+          <a class="btn btn-s btn-primary" type="button" data-toggle="modal" data-target="#confirmBooking" data-title="Confirm Booking" data-message="Are you sure you want to confirm this booking?">Submit</a>
           <a type="button" href="{{ URL::previous() }}" class="btn btn-warning" >Cancelar</a>
         {!! Form::close() !!}
         </div>
       </div>
+       @include("admin.dialogs.booking_confirm")
   </div>
   @endsection
   @section("scripts")

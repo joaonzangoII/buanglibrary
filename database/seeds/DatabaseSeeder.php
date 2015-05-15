@@ -193,6 +193,8 @@ class UserTableSeeder extends Seeder {
     public function run() {
       \App\Book::truncate();
       \App\Cover::truncate();
+     if(App::Environment()!="production")
+     {
       $user = \App\User::find(1);
       $categories = \App\BookCategory::all();
       $faker = Faker\Factory::create();
@@ -264,7 +266,6 @@ class UserTableSeeder extends Seeder {
 
         $book->cover()->save($cover);      
       }
-
-
+     }
     }
   }

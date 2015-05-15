@@ -142,11 +142,20 @@ class AdminBookingsController extends Controller {
    return $booking;
 	}
  public function booking_number(){
- 	$code = 'BK';
- 	$date = date('ymd');
- 	$seq  = 1;
- 	$b_number = sprintf('%s%s %04d', $code, $date, $seq);
 
+ 	if(count(\DB::select("select id from booking_sequences where date = CURDATE()"))==0){
+    $sequence = 0;
+ 	}else{
+    // $sequence = \DB::select("select id from booking_sequences where date = CURDATE()");?
+    $sequence = \DB::table('booking_sequences')->where('date', date("Y-m-d"))->pluck('id');
+    // dd($sequence);
+ 	}
+	$sequence = $sequence + 1;
+  // dd($sequence);
+
+	$code = "BK";
+	$b_number = $code . date("ymd") . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+  \DB::statement("insert into booking_sequences set id = $sequence, date = CURDATE() ON DUPLICATE KEY UPDATE id = $sequence");
  	return $b_number;
  }
 	/**
@@ -171,9 +180,9 @@ class AdminBookingsController extends Controller {
 		if(!Auth::User()->isAdmin()){
 			return redirect()->route("admin.forbidden");
 		}
-
+    $state_keys = ["pending"=> "pending","collected"=>"collected","cancelled"=>"cancelled"];
 		$user_keys = User::whereIn("user_type",["user"])->lists("fullname","id");
-		return view ("admin.pages.bookings.edit",compact("booking","book_keys","user_keys"));
+		return view ("admin.pages.bookings.edit",compact("booking","book_keys","user_keys","state_keys"));
 	}
 
 	/**
@@ -182,10 +191,71 @@ class AdminBookingsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Booking $booking)
+	public function update(BookingsRequest $request,Booking $booking)
 	{
-		dd($booking);
+	  $data = $request->all();
+		$start_date = new Carbon($data["start_date"]);
+	  $end_date = new Carbon($data["end_date"]);
+		if($start_date < Date("Y-m-d")){
+	  	return redirect()->back()->withInput()->withErrors('start date cannot be prior to todays date');
+	  }
+	  $user = User::find($data["booker_id"]);
+	  // $data["booking_number"] = $this->booking_number();
+	  if(Book::all()->count()==0){
+	  	return redirect()->back()->withInput()->withErrors('There are no books available');
+	  }
+	  $book = Book::find($data["book_id"]);
+	  $book->increment("avail_books",$booking->num_booked);
+	  $book->save(); 
+
+	  $data["booker_id"] = $user->id;
+	  $num_days = $start_date->diff($end_date)->days;
+    
+    if($data["num_booked"]<=0){
+  	  // dd($book->avail_books >= $data["num_booked"]);
+    	return redirect()->back()->withInput()->withErrors('You cannot book zero or negative boooks');
+    }
+	  if($data["num_booked"]> $book->avail_books){
+		  // dd($book->avail_books >= $data["num_booked"]);
+	  	return redirect()->back()->withInput()->withErrors('There are not enough books available');
+	  }
+
+	  if($end_date < $start_date){
+	  	return redirect()->back()->withInput()->withErrors('start date must not be after end date');
+	  }
+	  $num_days = $start_date->diff($end_date)->days;
+		if($num_days <=  0)
+		{
+			return redirect()->back()->withInput()->withErrors('start date and end date must not be the same');
+		}
+	  $amount = ($num_days * $book->price) * $data["num_booked"] ;
+    $discount = 0;
+	  if($user->isLecturer()){
+     $discount = $amount * 0.1;
+     $data["has_discount"]	= "Y";
+	  }
+	  else{
+	  	$data["has_discount"]	= "N";
+	  }
+	  $data["amount"] = $amount - $discount;
+
+		$booking->update($data);
+
+		// dd($booking);
+
+		// $user->bookings()->attach($booking);
+		// $booking->book()->attach($book);
+    $book->decrement("avail_books",$data["num_booked"]);
+    $book->save(); 
+    $send_data =["user" => $user,"book" => $book,"booking" => $booking];
+
+    \Mail::send("emails.booking", $send_data, function($message) use ($send_data)
+    {
+      $message->to($send_data["user"]->email, 'Buang Library')->subject('Booking');
+    });
+		return redirect()->route("admin.bookings.index")->with('flash_notice', 'A booking has been updated');
 	}
+
 
 	public function create_booking(Book $book)
 	{  	
@@ -210,10 +280,7 @@ class AdminBookingsController extends Controller {
 	  	return redirect()->back()->withInput()->withErrors('There are no books available');
 	  }
 	  $book = Book::find($data["book_id"]);
-	  // if(Auth::isAdmin())
-	  // else
-	  // if(!array_key_exists("booker_id" ,$data)){
-	  // 	return redirect()->back()->withInput()->withErrors('cannot book now');
+	  // if(Auth::isAdmin())["pending","cancelled","collected"]
 	  // }
 	  $data["booker_id"] = $user->id;
 	  $num_days = $start_date->diff($end_date)->days;

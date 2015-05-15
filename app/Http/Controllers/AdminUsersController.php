@@ -61,6 +61,13 @@ class AdminUsersController extends Controller {
 	 */
 	public function store(UsersRequest $request)
 	{
+
+		// dd(preg_match("/(\w+)( )(\w+)/", $request->input("fname")));
+		// if (preg_match("/^[a-z0-9_]+$/i", $request->input("fname")==false)) 
+		// {
+		// 	return redirect()->back()->withInput()->withErrors('enter a valid first name');
+		// }
+
 		$user = User::create($request->all());
 		$user->addPermissions($request->input("user_type"));
 		// dd($this->auth);

@@ -25,7 +25,7 @@ $userIpAddress = Request::getClientIp();
      {{-- {{ $_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'] }} --}}
     <div class="col-md-4">      
      @if ($send_data["book"]->cover)
-       <td><img class="img-responsive img-thumbnail" src="{{ HTML::image("/images/uploads/$send_data['book']->cover->image") }}" width="100" height="100" alt=""></td>
+       <td><img class="img-responsive img-thumbnail" src="{{ HTML::image("/images/uploads/" .$send_data['book']->cover->image") }}" width="100" height="100" alt=""></td>
 
      @else
        td><img class="img-responsive img-thumbnail" src="" width="100" height="100" alt=""></td>

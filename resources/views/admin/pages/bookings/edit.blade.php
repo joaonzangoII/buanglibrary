@@ -22,10 +22,16 @@
             {!! Form::label('book_id', 'Book') !!}
             {!! Form::select('book_id', $book_keys,null, array('class' => 'form-control', 'placeholder' => 'Book')) !!}
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             {!! Form::label('num_booked', 'Number to Book') !!}
             {!! Form::text('num_booked', Input::old('num_booked'), array('class' => 'form-control', 'placeholder' => '# to book')) !!}
           </div>
+
+          <div class="form-group">
+            {!! Form::label('state', 'Status') !!}
+            {!! Form::select('state', $state_keys,null, array('class' => 'form-control', 'placeholder' => 'Status')) !!}
+          </div>
+
 
           <div class="form-group">
               {!! Form::label('start_date', 'From') !!}
