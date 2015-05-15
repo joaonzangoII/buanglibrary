@@ -48,7 +48,7 @@
             {!! Form::select('book_category_id', $category_keys,null, array('class' => 'form-control', 'placeholder' => 'Book Category')) !!}
           </div>
           <div class="form-group">
-              {!! Form::label('published_at', 'Publicado em') !!}
+              {!! Form::label('published_at', 'Available from') !!}
               {!! Form::input('date','published_at', $book->published_at->format('Y-m-d'),['class'=>'form-control', 'placeholder' => 'published']) !!}
           </div>
           <div id="success"> </div>
