@@ -12,6 +12,7 @@
           <tr>
             <th>Name</th>
             <th>email</th>
+            <th>Phone Number</th>
             <th>ID Number</th>
             <th>Permissions</th>
             <th>User Type</th>
@@ -21,6 +22,7 @@
              <tr>
                <td>{{$value->fullname}}</td>
                <td>{{$value->email}}</td>
+               <td>{{$value->phone}}</td>
                <td>{{$value->id_number}}</td>
                <td>
                  @foreach ($value->permissions as $permission)
