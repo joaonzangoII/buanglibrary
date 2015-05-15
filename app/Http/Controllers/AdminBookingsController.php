@@ -46,11 +46,11 @@ class AdminBookingsController extends Controller {
 		  if($request->has("search"))
 		  {
 		  	// dd($request->input("title"));
-		  	$books=\Auth::User()->bookings()->freesearch($request->input("booking_number"),$request->input("amount"),$request->input("state"))->paginate(10);
+		  	$bookings=\Auth::User()->bookings()->freesearch($request->input("booking_number"),$request->input("amount"),$request->input("state"))->paginate(10);
 		  	// dd($books);
 		  }
 		  else{			
-		   $books=\Auth::User()->bookings()->paginate(10);
+		   $bookings=\Auth::User()->bookings()->paginate(10);
 		  }
 		}
 
