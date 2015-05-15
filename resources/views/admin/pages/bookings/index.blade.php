@@ -22,7 +22,7 @@
           <a href="/admin/bookings" class="btn btn-default">Cancel</a>
           <input name="search" type="hidden" value="1">
         {!! Form::close() !!}
-        <br>
+        <br> 
        @if (Auth::user()->isAdmin())
         <div class="pull-right">
           <a href="/admin/bookings/create" class="btn btn-default"><span class="glyphicon glyphicon-plus"> </span> New book</a>

@@ -29,7 +29,7 @@ class AdminBookingsController extends Controller {
 			return redirect("/auth/login");
 		}
 		if(\Auth::User()->isAdmin())
-		{
+		{ 
 			// $request
 			if($request->has("search"))
 			{
