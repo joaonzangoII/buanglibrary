@@ -61,8 +61,8 @@
                  <td>{{$value->num_booked}}</td>
                  <td>{{$value->amount}}</td>
                  <td>{{$value->has_discount}}</td>
-                 <td>{{$value->start_date}}</td>
-                 <td>{{$value->end_date}}</td>
+                 <td>{{$value->start_date->format('Y-m-d')}}</td>
+                 <td>{{$value->end_date->format('Y-m-d')}}</td>
                  <td>{{$value->state}}</td>
                  <td>{{$value->user[0]->fullname}}</td>
                  @if(Auth::User()->isAdmin())
