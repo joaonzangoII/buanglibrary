@@ -11,15 +11,17 @@ use \Validator as Validator;
 use App\Book;
 use App\BookCategory;
 use App\Http\Requests\BookCategoriesRequest;
+use Anam\Phpcart\Cart;
 class AdminCategoriesController extends Controller {
 
 	public function __construct()
 	{
+		$cart = new Cart();
 		\Debugbar::enable();
 		$this->middleware('auth');
     $category_keys = BookCategory::oldest("name")->lists("name","id");
     $categories = BookCategory::with("books")->get();
-    view()->share(compact("categories","category_keys"));
+    view()->share(compact("categories","category_keys","cart"));
 	}
 	/**
 	 * Display a listing of the resource.

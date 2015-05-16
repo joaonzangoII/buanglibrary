@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactsRequest;
-
+use Anam\Phpcart\Cart;
 class MailController extends Controller {
 
 	/**

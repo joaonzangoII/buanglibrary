@@ -27,7 +27,8 @@
 		"laracasts/utilities": "~2.0",
 		"dinesh/barcode": "5.0.*@dev",
 		"bkwld/croppa": "~4.0",
-		"zofe/rapyd": "2.0.*"
+		"zofe/rapyd": "2.0.*",
+		"anam/phpcart": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

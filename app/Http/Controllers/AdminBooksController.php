@@ -16,15 +16,17 @@ use Carbon\Carbon;
 use App\Http\Requests\BooksRequest;
 use App\Http\Requests\BookingsRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Anam\Phpcart\Cart;
 class AdminBooksController extends Controller {
 
 	public function __construct()
 	{
+		$cart = new Cart();
 		\Debugbar::enable();
 		$this->middleware('auth');
     $category_keys = BookCategory::oldest("name")->lists("name","id");
     $categories = BookCategory::with("books")->get();
-    view()->share(compact("categories","category_keys"));
+    view()->share(compact("categories","category_keys","cart"));
 	}
 	/**
 	 * Display a listing of the resource.
@@ -239,5 +241,24 @@ class AdminBooksController extends Controller {
 		$book->delete();
 		Session::flash('flash_notice', 'Successfully deleted the book!');
 		return redirect()->route("admin.books.index");
+	}
+
+	public function  add_to_cart (Book $book){
+    $cart = new Cart();
+
+    if($cart->has($book->id)){
+     $message = "Successfully Increased the amount of this book on the cart!";
+    }else{
+    	$message = 'Successfully Added the book to cart!';
+    }
+    $cart->add([
+	    'id'       => $book->id,
+	    'name'     => $book->title,
+	    'quantity' => 1,
+	    'price'    => $book->price,
+	    'user_id'   => Auth::user()->id
+    ]);
+   Session::flash('flash_notice', $message);
+   return redirect()->back();
 	}
 }

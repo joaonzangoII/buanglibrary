@@ -21,10 +21,14 @@ Route::get('/book/booking',["uses"=>"BooksController@book", "as" =>"book.booking
 Route::get('/book/{books}',"BooksController@index");
 
 Route::get('admin', 'AdminController@index');
+Route::post('admin/bookings/book-from-cart', array("uses"=>'AdminBookingsController@book_from_cart', "as"=>"admin.bookings.book.cart"));
+Route::get('admin/view-all-cart', array("uses"=>'AdminBookingsController@cart_get', "as"=>"admin.bookings.cart"));
+Route::get('admin/bookings/empty-cart', array("uses" => 'AdminBookingsController@empty_cart', "as" =>"admin.books.empty.cart"));
 Route::get('admin/books/booking-any', array("uses" => 'AdminBookingsController@create_any_booking', "as" =>"admin.bookings.any"));
 Route::get('admin/books/booking/{books}', array("uses" => 'AdminBookingsController@create_booking', "as" =>"admin.bookings.one"));
 Route::post('admin/books/booking', array("uses" => 'AdminBookingsController@store_booking', "as" =>"admin.bookings.user.store"));
 Route::get('admin/books/action', 'AdminBooksController@getAction');
+Route::get('admin/books/add-to-cart/{books}', array("uses" => 'AdminBooksController@add_to_cart', "as" =>"admin.books.add.cart"));
 Route::resource('admin/books', 'AdminBooksController');
 // /dataedit/uri?show={record_id}    filled output to READ record (without form)
 Route::resource('admin/categories', 'AdminCategoriesController');

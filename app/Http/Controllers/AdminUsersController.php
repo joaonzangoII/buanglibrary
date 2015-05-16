@@ -9,11 +9,12 @@ use \Auth as Auth;
 use \Session as Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
-
+use Anam\Phpcart\Cart;
 class AdminUsersController extends Controller {
  	protected $auth;
 	public function __construct(Guard $auth)
   {
+  	$cart = new Cart();
   	$this->auth = $auth;
     \Debugbar::enable();
   	$this->middleware('auth',['except' => 'store']);
@@ -29,7 +30,7 @@ class AdminUsersController extends Controller {
 		  	$emp_keys = ["user" =>"user"];
 		  }
 
-		view()->share(compact("emp_keys"));
+		view()->share(compact("emp_keys","cart"));
   }
 	public function index()
 	{

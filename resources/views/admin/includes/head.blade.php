@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Buang Library</title>
-
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/latest/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/admin/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/admin/css/jquery-ui.css">
     <link href="{{ asset('/assets/admin/css/app.css') }}" rel="stylesheet">

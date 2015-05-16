@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Anam\Phpcart\Cart;
 class AuthController extends Controller {
 
 	/*
@@ -20,6 +20,7 @@ class AuthController extends Controller {
 
 	use AuthenticatesAndRegistersUsers;
   protected $redirectTo ="/admin";
+  protected $redirectAfterLogout ="/";
 	/**
 	 * Create a new authentication controller instance.
 	 *
@@ -33,6 +34,14 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
+	}
+
+  public function getLogout()
+	{
+		$this->auth->logout();
+    $cart = new Cart();
+    $cart->flash();
+		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
 	}
 
 }

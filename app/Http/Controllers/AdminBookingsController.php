@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use \Auth as Auth;
 use \Session as Session;
 use App\Http\Requests\BookingsRequest;
+use Anam\Phpcart\Cart;
 class AdminBookingsController extends Controller {
 
 	/**
@@ -21,7 +22,8 @@ class AdminBookingsController extends Controller {
 	public function __construct()
 	{
 		$book_keys = Book::lists("title","id");
-    view()->share(compact("book_keys"));
+		$cart = new Cart();
+    view()->share(compact("book_keys","cart"));
 	}
 	public function index(Request $request)
 	{
@@ -419,5 +421,22 @@ class AdminBookingsController extends Controller {
 		$booking->delete();
 		Session::flash('flash_notice', 'Successfully deleted the booking');
 		return redirect()->route("admin.bookings.index");
+	}
+
+
+	public function cart_get(){
+   return view("admin.pages.bookings.view_cart");
+	}
+	public function book_from_cart(Request $request){
+    dd($request->all());
+
+   return redirect()->route("admin.bookings.index");
+	}
+
+	public function empty_cart (){
+   $cart = new Cart();
+   $cart->flash();
+   Session::flash('flash_notice', "cart has been reset");
+   return redirect("/admin");
 	}
 }

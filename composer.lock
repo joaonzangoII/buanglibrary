@@ -4,8 +4,57 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "edd563f9bf5465bd1c529cc9dd823289",
+    "hash": "08f736c81a53cc4ff65b9b4653a40556",
     "packages": [
+        {
+            "name": "anam/phpcart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anam-hossain/phpcart.git",
+                "reference": "42ad4691ff479fb57f12f08229c8c50729d7912a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anam-hossain/phpcart/zipball/42ad4691ff479fb57f12f08229c8c50729d7912a",
+                "reference": "42ad4691ff479fb57f12f08229c8c50729d7912a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0",
+                "symfony/http-foundation": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anam\\Phpcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anam hossain",
+                    "email": "enam33@gmail.com"
+                }
+            ],
+            "description": "Simple framework agnostic shopping cart",
+            "homepage": "https://github.com/anam-hossain/phpcart",
+            "keywords": [
+                "Laravel cart",
+                "Laravel shopping cart",
+                "cart",
+                "php cart",
+                "shopping cart"
+            ],
+            "time": "2015-05-12 02:56:43"
+        },
         {
             "name": "barryvdh/elfinder-builds",
             "version": "v2.1.0.3",
@@ -276,16 +325,16 @@
         },
         {
             "name": "bkwld/croppa",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BKWLD/croppa.git",
-                "reference": "5827cdf00f69f867e88c1459c4037671f10b078c"
+                "reference": "5ab0c620a70da1e6459e2aa8c3d53570383a3a34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BKWLD/croppa/zipball/5827cdf00f69f867e88c1459c4037671f10b078c",
-                "reference": "5827cdf00f69f867e88c1459c4037671f10b078c",
+                "url": "https://api.github.com/repos/BKWLD/croppa/zipball/5ab0c620a70da1e6459e2aa8c3d53570383a3a34",
+                "reference": "5ab0c620a70da1e6459e2aa8c3d53570383a3a34",
                 "shasum": ""
             },
             "require": {
@@ -295,7 +344,7 @@
                 "php": ">=5.4.0",
                 "symfony/http-foundation": "~2.0",
                 "symfony/http-kernel": "~2.0",
-                "weotch/phpthumb": "~1.0"
+                "weotch/phpthumb": ">=1.0.5,<2"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
@@ -317,7 +366,7 @@
                 }
             ],
             "description": "Image thumbnail creation through specially formatted URLs for Laravel",
-            "time": "2015-04-14 17:27:24"
+            "time": "2015-05-12 23:06:39"
         },
         {
             "name": "caffeinated/menus",
@@ -1929,16 +1978,16 @@
         },
         {
             "name": "kris/laravel-form-builder",
-            "version": "1.4.25",
+            "version": "1.4.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
-                "reference": "b023aaaa50c9aebf440e477c699f1a2881630a91"
+                "reference": "94e3a1c07fb961a5f6bd9676dcf28f02b250f9d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/b023aaaa50c9aebf440e477c699f1a2881630a91",
-                "reference": "b023aaaa50c9aebf440e477c699f1a2881630a91",
+                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/94e3a1c07fb961a5f6bd9676dcf28f02b250f9d7",
+                "reference": "94e3a1c07fb961a5f6bd9676dcf28f02b250f9d7",
                 "shasum": ""
             },
             "require": {
@@ -1977,7 +2026,7 @@
                 }
             ],
             "description": "Laravel form builder - symfony like",
-            "time": "2015-05-05 12:10:16"
+            "time": "2015-05-14 13:54:45"
         },
         {
             "name": "laracasts/flash",
@@ -3000,16 +3049,16 @@
         },
         {
             "name": "stevebauman/location",
-            "version": "v1.1.7",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevebauman/location.git",
-                "reference": "69bdd698812dbae1306fd3d53ed93be8f824d125"
+                "reference": "bcdcfda9fe1ceab06faabd338600e9e307e6fc04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/location/zipball/69bdd698812dbae1306fd3d53ed93be8f824d125",
-                "reference": "69bdd698812dbae1306fd3d53ed93be8f824d125",
+                "url": "https://api.github.com/repos/stevebauman/location/zipball/bcdcfda9fe1ceab06faabd338600e9e307e6fc04",
+                "reference": "bcdcfda9fe1ceab06faabd338600e9e307e6fc04",
                 "shasum": ""
             },
             "require": {
@@ -3023,7 +3072,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Stevebauman\\Location\\": "src/"
+                    "Stevebauman\\Location\\": "src/Stevebauman/Location/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3046,7 +3095,7 @@
                 "location",
                 "php"
             ],
-            "time": "2015-05-06 13:30:49"
+            "time": "2015-05-08 14:40:29"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3865,16 +3914,16 @@
         },
         {
             "name": "weotch/phpthumb",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/weotch/PHPThumb.git",
-                "reference": "316a472b9a00fb33450d46f463de62c0eadb876a"
+                "reference": "f5c1d2ef2e9de3bded7483778618bf8cac2511c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/weotch/PHPThumb/zipball/316a472b9a00fb33450d46f463de62c0eadb876a",
-                "reference": "316a472b9a00fb33450d46f463de62c0eadb876a",
+                "url": "https://api.github.com/repos/weotch/PHPThumb/zipball/f5c1d2ef2e9de3bded7483778618bf8cac2511c3",
+                "reference": "f5c1d2ef2e9de3bded7483778618bf8cac2511c3",
                 "shasum": ""
             },
             "replace": {
@@ -3896,7 +3945,7 @@
                 }
             ],
             "description": "Fork of PHPThumb that adds auto-image rotation based on EXIF data and composer support",
-            "time": "2013-04-08 22:11:00"
+            "time": "2015-05-12 22:56:19"
         },
         {
             "name": "yangqi/htmldom",
@@ -3988,16 +4037,16 @@
         },
         {
             "name": "zofe/rapyd",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zofe/rapyd-laravel.git",
-                "reference": "cb95a58e8af537ed106b192c98b29b5014c2a4b7"
+                "reference": "b4ccb4b1151e236cfdde0abf7d9ac21969284843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zofe/rapyd-laravel/zipball/cb95a58e8af537ed106b192c98b29b5014c2a4b7",
-                "reference": "cb95a58e8af537ed106b192c98b29b5014c2a4b7",
+                "url": "https://api.github.com/repos/zofe/rapyd-laravel/zipball/b4ccb4b1151e236cfdde0abf7d9ac21969284843",
+                "reference": "b4ccb4b1151e236cfdde0abf7d9ac21969284843",
                 "shasum": ""
             },
             "require": {
@@ -4035,7 +4084,7 @@
                 "form",
                 "laravel"
             ],
-            "time": "2015-04-18 19:23:02"
+            "time": "2015-05-15 10:25:44"
         }
     ],
     "packages-dev": [
@@ -5404,7 +5453,8 @@
         "fzaninotto/faker": 20,
         "yangqi/htmldom": 20,
         "doctrine/dbal": 20,
-        "dinesh/barcode": 20
+        "dinesh/barcode": 20,
+        "anam/phpcart": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Book;
 use App\BookCategory;
 use Illuminate\Http\Request;
-
+use Anam\Phpcart\Cart;
 class AdminController extends Controller {
 
   public function __construct()
@@ -21,6 +21,8 @@ class AdminController extends Controller {
 	 */
 	public function index()
   {
+    $cart = new Cart();
+    // $cart->flash();
     // $books = \DB::select("select *from books");
     // $book_categories = \DB::select("select *from book_categories");  
     $books = Book::latest()->take(10)->get();
@@ -31,7 +33,7 @@ class AdminController extends Controller {
     foreach ($book_categories as $key => $value) {
       $books_count[] = $value->books->count();
     }
-    return view ("admin.pages.index",compact('books','book_categories_list','books_count'));
+    return view ("admin.pages.index",compact('books','book_categories_list','books_count',"cart"));
   }
   public function forbidden()
 	{

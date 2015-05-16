@@ -70,9 +70,50 @@
 						<li><a href="{{ url('/auth/register') }}">Register</a></li>
 					@else
 					  <li><a href="{{ url('/') }}">Website</a></li>
+					  @if(!Auth::User()->isAdmin())
+					  <li><a  href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" role="button" >{{ $cart->count() }} items <span class="glyphicon glyphicon-shopping-cart"></span><b class="caret"></b></a>
+						  <ul class="dropdown-menu" role="menu">
+						  <table class="table table-striped">
+						    <th>ID</th>
+						    <th>Title</th>
+						    <th>Quantity</th>
+						    <th>Price</th>
+						    <th>User</th>
+						    @if($cart->count() > 5)
+						    	@foreach($cart->items()->take(5) as $item)
+							      <tr>      
+								      <td>{{ $item->id }}</td>
+								      <td>{{ $item->name }}</td>
+								      <td>{{ $item->quantity }}</td>
+								      <td>{{ $item->price }}</td>
+								      <td>{{ \App\User::find($item->user_id)->fullname }}</td>
+							      </tr>
+						       @endforeach
+                @else
+                  @foreach($cart->items() as $item)
+							      <tr>      
+								      <td>{{ $item->id }}</td>
+								      <td>{{ $item->name }}</td>
+								      <td>{{ $item->quantity }}</td>
+								      <td>{{ $item->price }}</td>
+								      <td>{{ \App\User::find($item->user_id)->fullname }}</td>
+							      </tr>
+						       @endforeach
+						    @endif
+						      
+						  </table>
+				{{-- 		  
+						  @foreach ($cart->items() as $item)
+						  	<li><a tabindex="-1" href="#">{{ $item->name }}  - {{ $item->quantity }} </a></li>
+						  @endforeach --}}
+						  	<li><a class="text-center" href="{{ route("admin.bookings.cart") }}">View All</a></li>
+						  </ul>
+					  </li>
+					  @endif
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->fullname }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
+
 								<li><a href="{{ route('admin.users.show',Auth::User()->id) }}">My Profile</a></li>
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
@@ -104,6 +145,7 @@
 	<script src="/assets/admin/js/select2.min.js"></script>
   <script src="/assets/admin/js/bootstrap-toggle.min.js"></script>
   <script type="text/javascript"  src="/assets/admin/js/chart.min.js"></script>
+  <script src="<a href="http://www.jqueryscript.net/tags.php?/twitter/">twitter</a>-bootstrap-hover-dropdown.js"></script> 
   {!!Rapyd::scripts() !!}
   @yield('scripts')
   <script type="text/javascript">
@@ -113,5 +155,11 @@
 	  });
 	  }, 5000);
   </script>
+{{--   <script>
+	  $(document).ready(function() {
+	  	$('.js-activated').dropdownHover().dropdown();
+	  });
+  </script> --}}
+
 </body>
 </html>

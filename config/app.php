@@ -168,6 +168,7 @@ return [
 		'Dinesh\Barcode\BarcodeServiceProvider',
 		'Bkwld\Croppa\ServiceProvider',
 		'Zofe\Rapyd\RapydServiceProvider',
+		'Anam\Phpcart\CartServiceProvider',
 		// 'Cartalyst\DataGrid\Laravel\DataGridServiceProvider',
 
 	],
@@ -238,6 +239,7 @@ return [
 		'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
     'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
     'Croppa' => 'Bkwld\Croppa\Facade',
+    'Cart' => 'Anam\Phpcart\Facades\Cart',
     // 'DataGrid' => 'Cartalyst\DataGrid\Laravel\Facades\DataGrid',
 
 	],
